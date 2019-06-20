@@ -29,6 +29,10 @@
             return View();
         }
 
+        //
+        // Samples from https://stackoverflow.com/questions/186062/can-an-asp-net-mvc-controller-return-an-image 
+        // More Good Stuff https://www.danylkoweb.com/Blog/update-dynamically-resizing-your-asp-net-mvc-images-LT
+
 
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult GetFile()
@@ -41,20 +45,19 @@
             return result;
         }
 
-        public ActionResult GetModifiedImage()
+        public ActionResult GetModifiedImage(string text = "Hello World")
         {
-            Image image = Image.FromFile(Path.Combine(Server.MapPath("/Content/images"), "image.png"));
+            BarcodeLib.Barcode b = new BarcodeLib.Barcode();
+            Image image = b.Encode(BarcodeLib.TYPE.CODE93, "038000356216", Color.Black, Color.White, 290, 120);
+
             using (Graphics g = Graphics.FromImage(image))
             {
-                // do something with the Graphics (eg. write "Hello World!")
-                string text = "Hello World!";
-
                 // Create font and brush.
-                Font drawFont = new Font("Arial", 10);
-                SolidBrush drawBrush = new SolidBrush(Color.Black);
-
+                Font drawFont = new Font("Arial", 18);
+                SolidBrush drawBrush = new SolidBrush(Color.Blue);
+               
                 // Create point for upper-left corner of drawing.
-                PointF stringPoint = new PointF(0, 0);
+                PointF stringPoint = new PointF(0, image.Height - 10);
 
                 g.DrawString(text, drawFont, drawBrush, stringPoint);
             }

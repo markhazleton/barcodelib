@@ -130,7 +130,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Dimensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageExtensions.cs" />
     <Compile Include="Controllers\ImageResult.cs" />
     <Compile Include="Controllers\ImageResultHelper.cs" />
     <Compile Include="Global.asax.cs">

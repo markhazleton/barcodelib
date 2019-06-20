@@ -8,10 +8,8 @@
     public class ImageResult : ActionResult
     {
         public ImageResult() { }
-
         public Image Image { get; set; }
         public ImageFormat ImageFormat { get; set; }
-
         public override void ExecuteResult(ControllerContext context)
         {
             // verify properties 
