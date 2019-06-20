@@ -1,0 +1,94 @@
+﻿@model BarcodeStandardWeb.Models.BarCodeVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.AlternateLabel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.AspectRatio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.BarHeight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.BarValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.BarWidth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.EncodedText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.EncodedTypeText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.EncodingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.IncludeLabel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode.Width)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.BarCodeList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlternateLabel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspectRatio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BarHeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BarValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BarWidth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EncodedText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EncodedTypeText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EncodingTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncludeLabel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Width)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>

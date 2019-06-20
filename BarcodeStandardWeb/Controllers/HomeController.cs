@@ -1,5 +1,8 @@
 ﻿namespace BarcodeStandardWeb.Controllers
 {
+    using Barcode.Web.Extensions;
+    using Barcode.Web.Models;
+    using BarcodeLib;
     using System;
     using System.Drawing;
     using System.Drawing.Imaging;
@@ -7,10 +10,8 @@
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
-
     public class HomeController : BaseController
     {
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -55,7 +56,7 @@
                 // Create font and brush.
                 Font drawFont = new Font("Arial", 18);
                 SolidBrush drawBrush = new SolidBrush(Color.Blue);
-               
+
                 // Create point for upper-left corner of drawing.
                 PointF stringPoint = new PointF(0, image.Height - 10);
 
@@ -73,6 +74,15 @@
             return new ImageResult { Image = image, ImageFormat = ImageFormat.Png };
         }
 
+        public ActionResult MyBarCode()
+        {
+            var BC = new BarCodeModel();
+            return new ImageResult
+            {
+                Image = BC.BarcodeImage,
+                ImageFormat = ImageFormat.Png
+            };
 
+        }
     }
 }
