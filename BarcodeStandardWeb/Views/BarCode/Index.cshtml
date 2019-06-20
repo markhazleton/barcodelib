@@ -11,7 +11,7 @@
                 @Html.DisplayNameFor(model => model.BarCode.AlternateLabel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BarCode.AspectRatio)
+                Generated Barcode
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BarCode.BarHeight)
@@ -52,7 +52,7 @@
                     @Html.DisplayFor(modelItem => item.AlternateLabel)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AspectRatio)
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.BarcodeByteArray)" class="img-fluid"  />                
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BarHeight)

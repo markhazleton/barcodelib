@@ -5,6 +5,11 @@
     using System.Drawing.Imaging;
     using System.Linq;
     using System.Web.Mvc;
+    //
+    // from https://stackoverflow.com/questions/186062/can-an-asp-net-mvc-controller-return-an-image 
+    //  https://www.danylkoweb.com/Blog/update-dynamically-resizing-your-asp-net-mvc-images-LT
+    //
+
     public class ImageResult : ActionResult
     {
         public ImageResult() { }
