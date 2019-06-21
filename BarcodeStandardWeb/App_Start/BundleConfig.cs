@@ -18,12 +18,14 @@ namespace BarcodeStandardWeb
             //Scripts
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.4.1.js",
                 "~/Scripts/bootstrap.js",
-                "~/Scripts/jquery.unobtrusive-ajax.js"));
+                "~/Scripts/jquery.unobtrusive-ajax.js",
+                "~/Scripts/fontawesome/fontawesome.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include("~/Scripts/jquery.validate*"));
 
             //CSS
-            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/bundles/style").Include("~/Content/bootstrap.css",
+                "~/Content/fontawesome-all.min.css"));
         }
     }
 }
