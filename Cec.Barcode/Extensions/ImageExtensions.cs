@@ -1,4 +1,4 @@
-﻿namespace Barcode.Web.Extensions
+﻿namespace Cec.Barcode.Extensions
 {
     using System;
     using System.Drawing;

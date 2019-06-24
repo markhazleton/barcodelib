@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeStandardWeb", "Barco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeStandardWeb.Tests", "BarcodeStandardWeb.Tests\BarcodeStandardWeb.Tests.csproj", "{BA5A2332-CF5E-43B5-9B71-09A6C9EDCC59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barcode.Web", "Barcode.Web\Barcode.Web.csproj", "{4621D7D5-B04E-4EEA-AFA8-D1BCB41963E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cec.Barcode", "Cec.Barcode\Cec.Barcode.csproj", "{4621D7D5-B04E-4EEA-AFA8-D1BCB41963E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,5 @@
 ﻿using BarcodeStandardWeb.Models;
+using Cec.Barcode.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,12 @@ namespace BarcodeStandardWeb.Controllers
         public ActionResult Edit(int id = 1)
         {
             return View(BarCodeMain.BarCodeList.Where(W => W.Id == id).FirstOrDefault());
+        }
+        [HttpPost]
+        public ActionResult Edit(BarCodeModel postBarcode, int id = 1)
+        {
+            BarCodeDb.Update(postBarcode);
+            return View(BarCodeDb.Get(id));
         }
     }
 }

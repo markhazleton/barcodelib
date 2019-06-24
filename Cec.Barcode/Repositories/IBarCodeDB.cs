@@ -1,9 +1,10 @@
-﻿namespace Barcode.Web.Repositories
+﻿namespace Cec.Barcode.Repositories
 {
-    using Barcode.Web.Models;
+    using Cec.Barcode.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     public interface IBarCodeDB
     {
         int Delete(int ID);

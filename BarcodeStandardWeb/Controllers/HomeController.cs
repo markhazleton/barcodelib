@@ -1,7 +1,7 @@
 ﻿namespace BarcodeStandardWeb.Controllers
 {
-    using Barcode.Web.Extensions;
-    using Barcode.Web.Models;
+    using Cec.Barcode.Extensions;
+    using Cec.Barcode.Models;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;

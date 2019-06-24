@@ -1,8 +1,6 @@
 ﻿namespace BarcodeStandardWeb.Controllers
 {
-    using Barcode.Web.Repositories;
-    using System;
-    using System.Linq;
+    using Cec.Barcode.Repositories;
     using System.Web.Mvc;
 
     public class BaseController : Controller

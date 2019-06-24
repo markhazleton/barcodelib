@@ -1,6 +1,6 @@
 ﻿namespace BarcodeStandardWeb.Models
 {
-    using Barcode.Web.Models;
+    using Cec.Barcode.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
