@@ -18,9 +18,9 @@
             AspectRatio = null;
             IncludeLabel = true;
             RotateFlip = RotateFlipType.Rotate180FlipXY;
-            AlternateLabel = "TEST TEST TEST";
+            AlternateLabel = "Control Origins";
             LabelPosition = Cec.Barcode.Extensions.LabelPositions.BOTTOMCENTER;
-            BarValue = "0000444";
+            BarValue = "controlorigins.com";
             BackColor = Color.White;
             ForeColor = Color.Black;
         }
@@ -97,7 +97,7 @@
                         b.LabelPosition = (BarcodeLib.LabelPositions)this.LabelPosition;
                     }//if
                 }//try
-                catch (Exception ex)
+                catch
                 {
                     // do Something!
                 }//catch
