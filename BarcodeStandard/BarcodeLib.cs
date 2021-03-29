@@ -8,6 +8,9 @@ using BarcodeLib.Symbologies;
 using BarcodeStandard;
 using System.Xml.Serialization;
 using System.Security;
+using System.Xml;
+using System.Text;
+using System.Text.Json;
 
 /* 
  * ***************************************************
@@ -21,7 +24,6 @@ using System.Security;
  *  barcode images from a string of data.            *
  * ***************************************************
  */
-[assembly: AllowPartiallyTrustedCallers]
 namespace BarcodeLib
 {
     #region Enums
@@ -33,6 +35,7 @@ namespace BarcodeLib
     /// <summary>
     /// Generates a barcode image of a specified symbology from a string of data.
     /// </summary>
+    [SecuritySafeCritical]
     public class Barcode : IDisposable
     {
         #region Variables
@@ -46,9 +49,8 @@ namespace BarcodeLib
         private Color _BackColor = Color.White;
         private int _Width = 300;
         private int _Height = 150;
-        private string _XML = "";
         private ImageFormat _ImageFormat = ImageFormat.Jpeg;
-        private Font _LabelFont = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+        private Font _LabelFont = new Font("Microsoft Sans Serif", 10 * DotsPerPointAt96Dpi, FontStyle.Bold, GraphicsUnit.Pixel);
         private LabelPositions _LabelPosition = LabelPositions.BOTTOMCENTER;
         private RotateFlipType _RotateFlipType = RotateFlipType.RotateNoneFlipNone;
         private bool _StandardizeLabel = true;
@@ -77,6 +79,23 @@ namespace BarcodeLib
             this.Encoded_Type = iType;
             GenerateBarcode();
         }
+        #endregion
+
+        #region Constants
+        /// <summary>
+        ///   The default resolution of 96 dots per inch.
+        /// </summary>
+        const float DefaultResolution = 96f;
+        /// <summary>
+        ///   The number of pixels in one point at 96DPI. Since there are 72 points in an inch, this is
+        ///   96/72.
+        /// </summary>
+        /// <remarks><para>
+        ///   Used when calculating default font size in terms of points at 96DPI by manually calculating
+        ///   pixels to avoid being affected by the system DPI. See issue #100
+        ///   and https://stackoverflow.com/a/10800363.
+        /// </para></remarks>
+        public const float DotsPerPointAt96Dpi = DefaultResolution / 72;
         #endregion
 
         #region Properties
@@ -177,6 +196,14 @@ namespace BarcodeLib
             set { _Height = value; }
         }
         /// <summary>
+        ///   The number of pixels per horizontal inch. Used when creating the Bitmap.
+        /// </summary>
+        public float HoritontalResolution { get; set; } = DefaultResolution;
+        /// <summary>
+        ///   The number of pixels per vertical inch. Used when creating the Bitmap.
+        /// </summary>
+        public float VerticalResolution { get; set; } = DefaultResolution;
+        /// <summary>
         ///   If non-null, sets the width of a bar. <see cref="Width"/> is ignored and calculated automatically.
         /// </summary>
         public int? BarWidth { get; set; }
@@ -226,13 +253,6 @@ namespace BarcodeLib
         {
             get;
             set;
-        }
-        /// <summary>
-        /// Gets the XML representation of the Barcode data and image.
-        /// </summary>
-        public string XML
-        {
-            get { return _XML; }
         }
         /// <summary>
         /// Gets or sets the image format to use when encoding and returning images. (Jpeg is default)
@@ -374,9 +394,7 @@ namespace BarcodeLib
 
             DateTime dtStartTime = DateTime.Now;
 
-            GenerateBarcode();
-
-            this.Encoded_Value = ibarcode.Encoded_Value;
+            this.Encoded_Value = GenerateBarcode();
             this.Raw_Data = ibarcode.RawData;
 
             _Encoded_Image = (Image)Generate_Image();
@@ -384,8 +402,6 @@ namespace BarcodeLib
             this.EncodedImage.RotateFlip(this.RotateFlipType);
 
             this.EncodingTime = ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
-
-            _XML = GetXML();
 
             return EncodedImage;
         }//Encode
@@ -513,12 +529,21 @@ namespace BarcodeLib
                 default: throw new Exception("EENCODE-2: Unsupported encoding type specified.");
             }//switch
 
-            return this.Encoded_Value;
-
+            return ibarcode.Encoded_Value;
         }
         #endregion
 
         #region Image Functions
+        /// <summary>
+        /// Create and preconfigures a Bitmap for use by the library. Ensures it is independent from
+        /// system DPI, etc.
+        /// </summary>
+        internal Bitmap CreateBitmap(int width, int height)
+        {
+            var bitmap = new Bitmap(width, height);
+            bitmap.SetResolution(HoritontalResolution, VerticalResolution);
+            return bitmap;
+        }
         /// <summary>
         /// Gets a bitmap representation of the encoded data.
         /// </summary>
@@ -556,7 +581,7 @@ namespace BarcodeLib
                             ILHeight -= this.LabelFont.Height;
                         }
 
-                        bitmap = new Bitmap(Width, Height);
+                        bitmap = CreateBitmap(Width, Height);
 
                         int bearerwidth = (int)((bitmap.Width) / 12.05);
                         int iquietzone = Convert.ToInt32(bitmap.Width * 0.05);
@@ -641,7 +666,7 @@ namespace BarcodeLib
                                 string defTxt = RawData;
                                 string labTxt = defTxt.Substring(0, 1) + "--" + defTxt.Substring(1, 6) + "--" + defTxt.Substring(7);
                                 
-                                Font labFont = new Font(this.LabelFont != null ? this.LabelFont.FontFamily.Name : "Arial", Labels.getFontsize(Width, Height, labTxt), FontStyle.Regular);
+                                Font labFont = new Font(this.LabelFont != null ? this.LabelFont.FontFamily.Name : "Arial", Labels.getFontsize(this, Width, Height, labTxt) * DotsPerPointAt96Dpi, FontStyle.Regular, GraphicsUnit.Pixel);
                                 if (this.LabelFont != null)
                                 {
                                     this.LabelFont.Dispose();
@@ -662,7 +687,7 @@ namespace BarcodeLib
                             }
                         }
 
-                        bitmap = new Bitmap(Width, Height);
+                        bitmap = CreateBitmap(Width, Height);
                         int iBarWidthModifier = 1;
                         if (iBarWidth <= 0)
                             throw new Exception("EGENERATE_IMAGE-2: Image size specified not large enough to draw image. (Bar size determined to be less than 1 pixel)");
@@ -744,7 +769,7 @@ namespace BarcodeLib
                                 string labTxt = defTxt.Substring(0, 1) + "--" + defTxt.Substring(1, 6) + "--" + defTxt.Substring(7);
 
                                 Font font = this.LabelFont;
-                                Font labFont = new Font(font != null ? font.FontFamily.Name : "Arial", Labels.getFontsize(Width, Height, labTxt), FontStyle.Regular);
+                                Font labFont = new Font(font != null ? font.FontFamily.Name : "Arial", Labels.getFontsize(this, Width, Height, labTxt) * DotsPerPointAt96Dpi, FontStyle.Regular, GraphicsUnit.Pixel);
 
                                 if (font != null)
                                 {
@@ -765,7 +790,7 @@ namespace BarcodeLib
                             }
                         }
 
-                        bitmap = new Bitmap(Width, Height);
+                        bitmap = CreateBitmap(Width, Height);
                         int iBarWidth = Width / Encoded_Value.Length;
                         int iBarWidthModifier = 1;
                         if (iBarWidth <= 0)
@@ -832,7 +857,7 @@ namespace BarcodeLib
                         }
 
 
-                        bitmap = new Bitmap(Width, Height);
+                        bitmap = CreateBitmap(Width, Height);
                         int iBarWidth = Width / Encoded_Value.Length;
                         int shiftAdjustment = 0;
                         int iBarWidthModifier = 1;
@@ -1025,7 +1050,44 @@ namespace BarcodeLib
         #endregion
 
         #region XML Methods
-        private string GetXML()
+       
+        private SaveData GetSaveData(Boolean includeImage = true)
+        {
+            SaveData saveData = new SaveData();
+            saveData.Type = EncodedType.ToString();
+            saveData.RawData = RawData;
+            saveData.EncodedValue = EncodedValue;
+            saveData.EncodingTime = EncodingTime;
+            saveData.IncludeLabel = IncludeLabel;
+            saveData.Forecolor = ColorTranslator.ToHtml(ForeColor);
+            saveData.Backcolor = ColorTranslator.ToHtml(BackColor);
+            saveData.CountryAssigningManufacturingCode = Country_Assigning_Manufacturer_Code;
+            saveData.ImageWidth = Width;
+            saveData.ImageHeight = Height;
+            saveData.RotateFlipType = RotateFlipType;
+            saveData.LabelPosition = (int)LabelPosition;
+            saveData.LabelFont = LabelFont.ToString();
+            saveData.ImageFormat = ImageFormat.ToString();
+            saveData.Alignment = (int)Alignment;
+
+            //get image in base 64
+            if (includeImage)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    EncodedImage.Save(ms, ImageFormat);
+                    saveData.Image = Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.None);
+                }//using
+            }
+            return saveData;
+        }
+        public string ToJSON(Boolean includeImage = true)
+        {
+            byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(GetSaveData(includeImage));
+            return (new UTF8Encoding(false)).GetString(bytes); //no BOM
+        }
+
+        public string ToXML(Boolean includeImage = true)
         {
             if (EncodedValue == "")
                 throw new Exception("EGETXML-1: Could not retrieve XML due to the barcode not being encoded first.  Please call Encode first.");
@@ -1033,35 +1095,14 @@ namespace BarcodeLib
             {
                 try
                 {
-                    using (SaveData xml = new SaveData())
+                    using (SaveData xml = GetSaveData(includeImage))
                     {
-                        xml.Type = EncodedType.ToString();
-                        xml.RawData = RawData;
-                        xml.EncodedValue = EncodedValue;
-                        xml.EncodingTime = EncodingTime;
-                        xml.IncludeLabel = IncludeLabel;
-                        xml.Forecolor = ColorTranslator.ToHtml(ForeColor);
-                        xml.Backcolor = ColorTranslator.ToHtml(BackColor);
-                        xml.CountryAssigningManufacturingCode = Country_Assigning_Manufacturer_Code;
-                        xml.ImageWidth = Width;
-                        xml.ImageHeight = Height;
-                        xml.RotateFlipType = RotateFlipType;
-                        xml.LabelPosition = (int)LabelPosition;
-                        xml.LabelFont = LabelFont.ToString();
-                        xml.ImageFormat = ImageFormat.ToString();
-                        xml.Alignment = (int)Alignment;
-
-                        //get image in base 64
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            EncodedImage.Save(ms, ImageFormat);
-                            xml.Image = Convert.ToBase64String(ms.ToArray(), Base64FormattingOptions.None);
-                        }//using
-
                         XmlSerializer writer = new XmlSerializer(typeof(SaveData));
-                        StringWriter sw = new StringWriter();
-                        writer.Serialize(sw, xml);
-                        return sw.ToString();
+                        using (Utf8StringWriter sw = new Utf8StringWriter())
+                        {
+                            writer.Serialize(sw, xml);
+                            return sw.ToString();
+                        }
                     }//using
                 }//try
                 catch (Exception ex)
@@ -1070,36 +1111,46 @@ namespace BarcodeLib
                 }//catch
             }//else
         }
-        public static SaveData GetSaveDataFromFile(string fileContents)
+        public static SaveData FromJSON(Stream jsonStream)
+        {
+            using (jsonStream)
+            {
+                if (jsonStream is MemoryStream)
+                {
+                    return JsonSerializer.Deserialize<SaveData>(((MemoryStream)jsonStream).ToArray());
+                } 
+                else
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        jsonStream.CopyTo(memoryStream);
+                        return JsonSerializer.Deserialize<SaveData>(memoryStream.ToArray());
+                    }
+                }
+                
+            }
+        }
+        public static SaveData FromXML(Stream xmlStream)
         {
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
-                SaveData saveData;
-                using (TextReader reader = new StringReader(fileContents))
+                using (XmlReader reader = XmlReader.Create(xmlStream))
                 {
-                    saveData = (SaveData)serializer.Deserialize(reader);
+                    return (SaveData)serializer.Deserialize(reader);
                 }
-
-                return saveData;
             }//try
             catch (Exception ex)
             {
                 throw new Exception("EGETIMAGEFROMXML-1: " + ex.Message);
             }//catch
         }
-        public static Image GetImageFromXML(String internalXML)
+        public static Image GetImageFromSaveData(SaveData saveData)
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
-                SaveData result;
-                using (TextReader reader = new StringReader(internalXML))
-                {
-                    result = (SaveData)serializer.Deserialize(reader);
-                }
                 //loading it to memory stream and then to image object
-                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(result.Image)))
+                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(saveData.Image)))
                 {
                     return Image.FromStream(ms);
                 }//using
@@ -1108,6 +1159,11 @@ namespace BarcodeLib
             {
                 throw new Exception("EGETIMAGEFROMXML-1: " + ex.Message);
             }//catch
+        }
+
+        public class Utf8StringWriter : StringWriter
+        {
+            public override Encoding Encoding => new UTF8Encoding(false);
         }
         #endregion
 
@@ -1137,7 +1193,7 @@ namespace BarcodeLib
             using (Barcode b = new Barcode())
             {
                 Image i = b.Encode(iType, Data);
-                XML = b.XML;
+                XML = b.ToXML();
                 return i;
             }//using
         }
@@ -1227,7 +1283,7 @@ namespace BarcodeLib
             {
                 b.IncludeLabel = IncludeLabel;
                 Image i = b.Encode(iType, Data, DrawColor, BackColor, Width, Height);
-                XML = b.XML;
+                XML = b.ToXML();
                 return i;
             }//using
         }
@@ -1254,7 +1310,6 @@ namespace BarcodeLib
                 _Encoded_Image?.Dispose();
                 _Encoded_Image = null;
 
-                _XML = null;
                 Raw_Data = null;
                 Encoded_Value = null;
                 _Country_Assigning_Manufacturer_Code = null;

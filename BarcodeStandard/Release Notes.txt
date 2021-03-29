@@ -1,5 +1,26 @@
 Release Notes for BarcodeLib.dll
 ================================
+2.3.0.0
+- Fix EAN13 country code lookup failure
+- Update to System.Drawing.Common 5.0.0
+2.2.10.0
+- Fix Standard 2 of 5 encoding bug
+2.2.9.0
+- Fix Interleaved 2 of 5 encoding bug
+2.2.8.0
+- Fix Standard 2 of 5 checksum calculation
+2.2.7.0
+- Fix Interleaved 2 of 5 checksum calculation
+- Add support setting DPI for height and width
+- Fix UPC-E encoding
+- Fix font resizing issue
+- Add .snupkg packaging for source debugging
+2.2.6.0
+- bug fix
+2.2.5.0
+- Remove unnecessary calculations to make Pharmacode more efficient
+2.2.4.0
+- Fix incorrect encoding for single digit Pharmacode
 2.2.3.0
 - Allow use in partially trusted assemblies for SSRS
 2.2.2.0

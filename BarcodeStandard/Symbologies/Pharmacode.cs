@@ -46,57 +46,32 @@ namespace BarcodeLib.Symbologies
                 Error("EPHARM-4: Data contains invalid  characters (invalid numeric range).");
             }//if
 
-            int startIndex = 0;
-
-            //find start index
-            for (int index = 15; index >= 0; index--)
-            { 
-                if (Math.Pow(2, index) < num/2)
-                {
-                    startIndex = index;
-                    break;
-                }
-            }
-
-            double sum = Math.Pow(2, startIndex + 1) - 2;
-            string [] encoded = new string[startIndex + 1];
-            int i = 0;
-
-            for (int index = startIndex; index >= 0; index--)
+            var result = String.Empty;
+            do
             {
-                double power = Math.Pow(2, index);
-                double diff = num - sum;
-                if (diff > power)
+                if ((num & 1) == 0)
                 {
-                    encoded[i++] = _thickBar;
-                    sum += power;
+                    result = _thickBar + result;
+                    num = (num - 2) / 2;
                 }
                 else
                 {
-                    encoded[i++] = _thinBar;
+                    result = _thinBar + result;
+                    num = (num - 1) / 2;
                 }
-            }
 
-            string result = String.Empty;
-            foreach (string s in encoded)
-            {
-                if (result != String.Empty)
+                if (num != 0)
                 {
-                    result += _gap;
+                    result = _gap + result;
                 }
-
-                result += s;
-            }
+            } while (num != 0);
 
             return result;
         }
 
         #region IBarcode Members
 
-        public string Encoded_Value
-        {
-            get { return Encode_Pharmacode(); }
-        }
+        public string Encoded_Value => Encode_Pharmacode();
 
         #endregion
     }
