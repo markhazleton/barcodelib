@@ -9,12 +9,13 @@
         private List<BarCodeModel> _list;
         public BarCodeMock()
         {
-            _list = new List<BarCodeModel>()
+            _list = new List<BarCodeModel>();
+
+            Random rnd = new Random();
+            for (int p = 0; p < 20; p++)
             {
-                new BarCodeModel("1111111"),
-                new BarCodeModel("2222222"),
-                new BarCodeModel("3333333")
-            };
+                _list.Add(new BarCodeModel(rnd.Next(100000000, 999999999).ToString()));
+            }
 
             int i = 1;
             foreach (var bc in _list)
@@ -23,8 +24,8 @@
                 bc.Id = i;
                 i++;
             }
-
         }
+
         public int Delete(int id)
         {
             var myBC = _list.Where(w => w.Id == id).FirstOrDefault();

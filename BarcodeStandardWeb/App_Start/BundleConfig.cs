@@ -16,7 +16,7 @@ namespace BarcodeStandardWeb
         public static void RegisterBundles(BundleCollection bundles)
         {
             //Scripts
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.4.1.js",
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-3.6.0.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js",
                 "~/Scripts/fontawesome/fontawesome.min.js",
