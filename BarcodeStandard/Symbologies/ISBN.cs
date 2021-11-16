@@ -23,12 +23,12 @@ namespace BarcodeLib.Symbologies
             {
                 case 10:
                 case 9:
-                {
-                    if (Raw_Data.Length == 10) Raw_Data = Raw_Data.Remove(9, 1);
-                    Raw_Data = "978" + Raw_Data;
-                    type = "ISBN"; //if
-                    break;
-                }
+                    {
+                        if (Raw_Data.Length == 10) Raw_Data = Raw_Data.Remove(9, 1);
+                        Raw_Data = "978" + Raw_Data;
+                        type = "ISBN"; //if
+                        break;
+                    }
                 case 12 when Raw_Data.StartsWith("978"):
                     type = "BOOKLAND-NOCHECKDIGIT"; //else if
                     break;

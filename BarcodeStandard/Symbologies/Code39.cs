@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 namespace BarcodeLib.Symbologies
 {
@@ -8,8 +9,8 @@ namespace BarcodeLib.Symbologies
     /// </summary>
     class Code39 : BarcodeCommon, IBarcode
     {
-        private readonly System.Collections.Hashtable C39_Code = new System.Collections.Hashtable(); //is initialized by init_Code39()
-        private readonly System.Collections.Hashtable ExtC39_Translation = new System.Collections.Hashtable();
+        private readonly Hashtable C39_Code = new Hashtable(); //is initialized by init_Code39()
+        private readonly Hashtable ExtC39_Translation = new Hashtable();
         private readonly bool _allowExtended;
         private readonly bool _enableChecksum;
 
@@ -54,13 +55,13 @@ namespace BarcodeLib.Symbologies
             init_Code39();
             init_ExtendedCode39();
 
-            var strNoAstr = Raw_Data.Replace("*", "");
+            var strNoAstr = Raw_Data.Replace("*", string.Empty);
             var strFormattedData = "*" + strNoAstr + (_enableChecksum ? GetChecksumChar(strNoAstr).ToString() : String.Empty) + "*";
 
             if (_allowExtended)
                 InsertExtendedCharsIfNeeded(ref strFormattedData);
 
-            var result = "";
+            var result = string.Empty;
             //foreach (char c in this.FormattedData)
             foreach (var c in strFormattedData)
             {
@@ -78,8 +79,8 @@ namespace BarcodeLib.Symbologies
                 }//catch
             }//foreach
 
-            result = result.Substring(0, result.Length-1);
-            
+            result = result.Substring(0, result.Length - 1);
+
             //clear the hashtable so it no longer takes up memory
             C39_Code.Clear();
 
@@ -228,7 +229,7 @@ namespace BarcodeLib.Symbologies
         }
         private void InsertExtendedCharsIfNeeded(ref string formattedData)
         {
-            var output = "";
+            var output = string.Empty;
             foreach (var c in formattedData)
             {
                 try
@@ -236,8 +237,8 @@ namespace BarcodeLib.Symbologies
                     var s = C39_Code[c].ToString();
                     output += c;
                 }//try
-                catch 
-                { 
+                catch
+                {
                     //insert extended substitution
                     var oTrans = ExtC39_Translation[c.ToString()];
                     output += oTrans.ToString();
@@ -246,7 +247,7 @@ namespace BarcodeLib.Symbologies
 
             formattedData = output;
         }
-        private char GetChecksumChar(string strNoAstr) 
+        private char GetChecksumChar(string strNoAstr)
         {
             //checksum
             var Code39_Charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%";

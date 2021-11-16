@@ -25,22 +25,22 @@ namespace BarcodeStandardWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public Microsoft.AspNetCore.Mvc.ActionResult Index()
         {
             return View(BarCodeMain);
         }
         [HttpGet]
-        public ActionResult Details(int id = 1)
+        public Microsoft.AspNetCore.Mvc.ActionResult Details(int id = 1)
         {
             return View(BarCodeMain.BarCodeList.Where(W=>W.Id==id).FirstOrDefault());
         }
         [HttpGet]
-        public ActionResult Edit(int id = 1)
+        public Microsoft.AspNetCore.Mvc.ActionResult Edit(int id = 1)
         {
             return View(BarCodeMain.BarCodeList.Where(W => W.Id == id).FirstOrDefault());
         }
         [HttpPost]
-        public ActionResult Edit(BarCodeModel postBarcode, int id = 1)
+        public Microsoft.AspNetCore.Mvc.ActionResult Edit(BarCodeModel postBarcode, int id = 1)
         {
             BarCodeDb.Update(postBarcode);
             return View(BarCodeDb.Get(id));

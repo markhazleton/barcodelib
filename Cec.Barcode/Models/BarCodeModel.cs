@@ -1,4 +1,6 @@
-﻿namespace Cec.Barcode.Models
+﻿using System.Drawing.Imaging;
+
+namespace Cec.Barcode.Models
 {
     using BarcodeLib;
     using System;
@@ -72,7 +74,7 @@
             {
                 using (MemoryStream mStream = new MemoryStream())
                 {
-                    BarcodeImage.Save(mStream, System.Drawing.Imaging.ImageFormat.Png);
+                    BarcodeImage.Save(mStream, ImageFormat.Png);
                     return mStream.ToArray();
                 }
             }
@@ -87,14 +89,14 @@
                 {
                     if (EncodedType != Cec.Barcode.Extensions.TYPE.UNSPECIFIED)
                     {
-                        b.EncodedType = (BarcodeLib.TYPE)EncodedType;
-                        b.Alignment = (BarcodeLib.AlignmentPositions)this.AlignmentPosition;
+                        b.EncodedType = (TYPE)EncodedType;
+                        b.Alignment = (AlignmentPositions)this.AlignmentPosition;
                         b.BarWidth = this.BarWidth;
                         b.AspectRatio = this.AspectRatio;
                         b.IncludeLabel = this.IncludeLabel;
                         b.RotateFlipType = this.RotateFlip;
                         b.AlternateLabel = this.AlternateLabel;
-                        b.LabelPosition = (BarcodeLib.LabelPositions)this.LabelPosition;
+                        b.LabelPosition = (LabelPositions)this.LabelPosition;
                     }//if
                 }//try
                 catch

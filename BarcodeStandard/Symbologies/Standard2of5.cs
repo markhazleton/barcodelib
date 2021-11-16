@@ -32,7 +32,7 @@ namespace BarcodeLib.Symbologies
                 result += S25_Code[(int)char.GetNumericValue(Raw_Data, i)];
             }
 
-            result += _encodedType == TYPE.Standard2of5_Mod10 ? S25_Code[CalculateMod10CheckDigit()] : "";
+            result += _encodedType == TYPE.Standard2of5_Mod10 ? S25_Code[CalculateMod10CheckDigit()] : string.Empty;
 
             //add ending bars
             result += "1101011";

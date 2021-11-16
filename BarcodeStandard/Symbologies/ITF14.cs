@@ -35,7 +35,7 @@ namespace BarcodeLib.Symbologies
                 var bars = true;
                 var patternbars = ITF14_Code[Int32.Parse(Raw_Data[i].ToString())];
                 var patternspaces = ITF14_Code[Int32.Parse(Raw_Data[i + 1].ToString())];
-                var patternmixed = "";
+                var patternmixed = string.Empty;
 
                 //interleave
                 while (patternbars.Length > 0)
@@ -76,7 +76,7 @@ namespace BarcodeLib.Symbologies
             {
                 var total = 0;
 
-                for (var i = 0; i <= Raw_Data.Length-1; i++)
+                for (var i = 0; i <= Raw_Data.Length - 1; i++)
                 {
                     var temp = Int32.Parse(Raw_Data.Substring(i, 1));
                     total += temp * ((i == 0 || i % 2 == 0) ? 3 : 1);

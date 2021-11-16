@@ -15,7 +15,7 @@ namespace BarcodeLib.Symbologies
         public static readonly char FNC3 = Convert.ToChar(202);
         public static readonly char FNC4 = Convert.ToChar(203);
 
-        public enum TYPES:int { DYNAMIC, A, B, C };
+        public enum TYPES : int { DYNAMIC, A, B, C };
         private readonly DataTable C128_Code = new DataTable("C128");
         private List<string> _FormattedData = new List<string>();
         private List<string> _EncodedData = new List<string>();
@@ -47,7 +47,7 @@ namespace BarcodeLib.Symbologies
             //initialize datastructure to hold encoding information
             init_Code128();
 
-            return GetEncoding();            
+            return GetEncoding();
         }//Encode_Code128
         private void init_Code128()
         {
@@ -122,7 +122,7 @@ namespace BarcodeLib.Symbologies
             C128_Code.Rows.Add(new object[] { "57", "Y", "Y", "57", "11101101000" });
             C128_Code.Rows.Add(new object[] { "58", "Z", "Z", "58", "11101100010" });
             C128_Code.Rows.Add(new object[] { "59", "[", "[", "59", "11100011010" });
-            C128_Code.Rows.Add(new object[] { "60",@"\",@"\", "60", "11101111010" });
+            C128_Code.Rows.Add(new object[] { "60", @"\", @"\", "60", "11101111010" });
             C128_Code.Rows.Add(new object[] { "61", "]", "]", "61", "11001000010" });
             C128_Code.Rows.Add(new object[] { "62", "^", "^", "62", "11110001010" });
             C128_Code.Rows.Add(new object[] { "63", "_", "_", "63", "10100110000" });
@@ -169,7 +169,7 @@ namespace BarcodeLib.Symbologies
             C128_Code.Rows.Add(new object[] { "103", "START_A", "START_A", "START_A", "11010000100" });
             C128_Code.Rows.Add(new object[] { "104", "START_B", "START_B", "START_B", "11010010000" });
             C128_Code.Rows.Add(new object[] { "105", "START_C", "START_C", "START_C", "11010011100" });
-            C128_Code.Rows.Add(new object[] { "", "STOP", "STOP", "STOP", "11000111010" });
+            C128_Code.Rows.Add(new object[] { string.Empty, "STOP", "STOP", "STOP", "11000111010" });
         }//init_Code128
         private List<DataRow> FindStartorCodeCharacter(string s, ref int col)
         {
@@ -262,7 +262,7 @@ namespace BarcodeLib.Symbologies
 
                 var value = UInt32.Parse(rows[0]["Value"].ToString());
                 var addition = value * ((i == 0) ? 1 : i);
-                checkSum +=  addition;
+                checkSum += addition;
             }//for
 
             var remainder = (checkSum % 103);
@@ -271,7 +271,7 @@ namespace BarcodeLib.Symbologies
         }
         private void BreakUpDataForEncoding()
         {
-            var temp = "";
+            var temp = string.Empty;
             var tempRawData = Raw_Data;
 
             //breaking the raw data up for code A and code B will mess up the encoding
@@ -299,7 +299,8 @@ namespace BarcodeLib.Symbologies
                                 {
                                     indexOfFirstNumeric = x;
                                 }
-                            } else if (c != FNC1)
+                            }
+                            else if (c != FNC1)
                             {
                                 Error("EC128-6: Only numeric values can be encoded with C128-C (Invalid char at position " + x + ").");
                             }
@@ -316,7 +317,7 @@ namespace BarcodeLib.Symbologies
             {
                 if (Char.IsNumber(c))
                 {
-                    if (temp == "")
+                    if (temp == string.Empty)
                     {
                         temp += c;
                     }//if
@@ -324,43 +325,47 @@ namespace BarcodeLib.Symbologies
                     {
                         temp += c;
                         _FormattedData.Add(temp);
-                        temp = "";
+                        temp = string.Empty;
                     }//else
                 }//if
                 else
                 {
-                    if (temp != "")
+                    if (temp != string.Empty)
                     {
                         _FormattedData.Add(temp);
-                        temp = "";
+                        temp = string.Empty;
                     }//if
                     _FormattedData.Add(c.ToString());
                 }//else
             }//foreach
 
             //if something is still in temp go ahead and push it onto the queue
-            if (temp != "")
+            if (temp != string.Empty)
             {
                 _FormattedData.Add(temp);
-                temp = "";
+                temp = string.Empty;
             }//if
         }
         private void InsertStartandCodeCharacters()
         {
             DataRow CurrentCodeSet = null;
-            var CurrentCodeString = "";
+            var CurrentCodeString = string.Empty;
 
             if (type != TYPES.DYNAMIC)
             {
                 switch (type)
                 {
-                    case TYPES.A: _FormattedData.Insert(0, "START_A");
+                    case TYPES.A:
+                        _FormattedData.Insert(0, "START_A");
                         break;
-                    case TYPES.B: _FormattedData.Insert(0, "START_B");
+                    case TYPES.B:
+                        _FormattedData.Insert(0, "START_B");
                         break;
-                    case TYPES.C: _FormattedData.Insert(0, "START_C");
+                    case TYPES.C:
+                        _FormattedData.Insert(0, "START_C");
                         break;
-                    default: Error("EC128-4: Unknown start type in fixed type encoding.");
+                    default:
+                        Error("EC128-4: Unknown start type in fixed type encoding.");
                         break;
                 }
             }//if
@@ -387,30 +392,30 @@ namespace BarcodeLib.Symbologies
                         //only insert a new code char if starting a new codeset
                         //if (CurrentCodeString == "" || !tempStartChars[0][col].ToString().EndsWith(CurrentCodeString)) /* Removed because of bug */
 
-                        if (CurrentCodeString == "" || !sameCodeSet)
+                        if (CurrentCodeString == string.Empty || !sameCodeSet)
                         {
                             CurrentCodeSet = tempStartChars[0];
-                            
-                                var error = true;
-                                while (error)
-                                {
-                                    try
-                                    {
-                                        CurrentCodeString = CurrentCodeSet[col].ToString().Split(new char[] { '_' })[1];
-                                        error = false;
-                                    }//try
-                                    catch 
-                                    { 
-                                        error = true;
 
-                                        if (col++ > CurrentCodeSet.ItemArray.Length)
-                                            Error("No start character found in CurrentCodeSet.");
-                                    }//catch
-                                }//while
-                            
+                            var error = true;
+                            while (error)
+                            {
+                                try
+                                {
+                                    CurrentCodeString = CurrentCodeSet[col].ToString().Split(new char[] { '_' })[1];
+                                    error = false;
+                                }//try
+                                catch
+                                {
+                                    error = true;
+
+                                    if (col++ > CurrentCodeSet.ItemArray.Length)
+                                        Error("No start character found in CurrentCodeSet.");
+                                }//catch
+                            }//while
+
                             _FormattedData.Insert(i++, CurrentCodeSet[col].ToString());
                         }//if
-                        
+
                     }//for
                 }//try
                 catch (Exception ex)
@@ -429,7 +434,7 @@ namespace BarcodeLib.Symbologies
 
             var CheckDigit = CalculateCheckDigit();
 
-            var Encoded_Data = "";
+            var Encoded_Data = string.Empty;
             foreach (var s in _FormattedData)
             {
                 //handle exception with apostrophes in select statements
@@ -439,25 +444,30 @@ namespace BarcodeLib.Symbologies
                 //select encoding only for type selected
                 switch (type)
                 {
-                    case TYPES.A: E_Row = C128_Code.Select("A = '" + s1 + "'");
+                    case TYPES.A:
+                        E_Row = C128_Code.Select("A = '" + s1 + "'");
                         break;
-                    case TYPES.B: E_Row = C128_Code.Select("B = '" + s1 + "'");
+                    case TYPES.B:
+                        E_Row = C128_Code.Select("B = '" + s1 + "'");
                         break;
-                    case TYPES.C: E_Row = C128_Code.Select("C = '" + s1 + "'");
+                    case TYPES.C:
+                        E_Row = C128_Code.Select("C = '" + s1 + "'");
                         break;
-                    case TYPES.DYNAMIC: E_Row = C128_Code.Select("A = '" + s1 + "'");
+                    case TYPES.DYNAMIC:
+                        E_Row = C128_Code.Select("A = '" + s1 + "'");
 
-                                        if (E_Row.Length <= 0)
-                                        {
-                                            E_Row = C128_Code.Select("B = '" + s1 + "'");
+                        if (E_Row.Length <= 0)
+                        {
+                            E_Row = C128_Code.Select("B = '" + s1 + "'");
 
-                                            if (E_Row.Length <= 0)
-                                            {
-                                                E_Row = C128_Code.Select("C = '" + s1 + "'");
-                                            }//if
-                                        }//if
+                            if (E_Row.Length <= 0)
+                            {
+                                E_Row = C128_Code.Select("C = '" + s1 + "'");
+                            }//if
+                        }//if
                         break;
-                    default: E_Row = null;
+                    default:
+                        E_Row = null;
                         break;
                 }//switch              
 
@@ -482,7 +492,7 @@ namespace BarcodeLib.Symbologies
 
             return Encoded_Data;
         }
-        
+
         #region IBarcode Members
 
         public string Encoded_Value => Encode_Code128();

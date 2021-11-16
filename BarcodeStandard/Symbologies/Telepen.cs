@@ -7,7 +7,7 @@ namespace BarcodeLib.Symbologies
     ///  Telepen encoding
     ///  Written by: Brad Barnhill
     /// </summary>
-    class Telepen: BarcodeCommon, IBarcode
+    class Telepen : BarcodeCommon, IBarcode
     {
         private static readonly Hashtable Telepen_Code = new Hashtable();
         private enum StartStopCode : int { START1, STOP1, START2, STOP2, START3, STOP3 };
@@ -35,7 +35,7 @@ namespace BarcodeLib.Symbologies
                 Init_Telepen();
 
             _iCheckSum = 0;
-            var result = "";
+            var result = string.Empty;
 
             SetEncodingSequence();
 
@@ -43,7 +43,7 @@ namespace BarcodeLib.Symbologies
             result = Telepen_Code[_startCode].ToString();
 
             switch (_startCode)
-            { 
+            {
                 //numeric --> ascii
                 case StartStopCode.START2:
                     EncodeNumeric(RawData.Substring(0, _switchModeIndex), ref result);
@@ -85,7 +85,7 @@ namespace BarcodeLib.Symbologies
                     _iCheckSum += Convert.ToInt32(c);
                 }//foreach
             }//try
-            catch 
+            catch
             {
                 Error("ETELEPEN-1: Invalid data when encoding ASCII");
             }//catch
@@ -169,7 +169,7 @@ namespace BarcodeLib.Symbologies
                         _switchModeIndex = (StartNumerics % 2) == 1 ? StartNumerics - 1 : StartNumerics;
                     }//if
                     else
-                    { 
+                    {
                         //start in ascii switching to numeric
                         _startCode = StartStopCode.START3;
                         _stopCode = StartStopCode.STOP3;

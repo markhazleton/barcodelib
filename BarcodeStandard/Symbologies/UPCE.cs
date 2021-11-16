@@ -27,28 +27,28 @@ namespace BarcodeLib.Symbologies
         /// </summary>
         private string Encode_UPCE()
         {
-            if (Raw_Data.Length != 6 && Raw_Data.Length != 8 && Raw_Data.Length != 12) 
+            if (Raw_Data.Length != 6 && Raw_Data.Length != 8 && Raw_Data.Length != 12)
                 Error("EUPCE-1: Invalid data length. (8 or 12 numbers only)");
 
-            if (!CheckNumericOnly(Raw_Data)) 
+            if (!CheckNumericOnly(Raw_Data))
                 Error("EUPCE-2: Numeric only.");
 
             //check for a valid number system
             var numberSystem = Int32.Parse(Raw_Data[0].ToString());
-            if (numberSystem != 0 && numberSystem != 1) 
+            if (numberSystem != 0 && numberSystem != 1)
                 Error("EUPCE-3: Invalid Number System (only 0 & 1 are valid)");
 
             var CheckDigit = Int32.Parse(Raw_Data[Raw_Data.Length - 1].ToString());
-            
+
             //Convert to UPC-E from UPC-A if necessary
             if (Raw_Data.Length == 12)
             {
-                var UPCECode = "";
+                var UPCECode = string.Empty;
 
                 //break apart into components
                 var manufacturer = Raw_Data.Substring(1, 5);
                 var productCode = Raw_Data.Substring(6, 5);
-                
+
                 if (manufacturer.EndsWith("000") || manufacturer.EndsWith("100") || manufacturer.EndsWith("200") && Int32.Parse(productCode) <= 999)
                 {
                     //rule 1
@@ -83,7 +83,7 @@ namespace BarcodeLib.Symbologies
             }//if
 
             //get encoding pattern 
-            var pattern = "";
+            var pattern = string.Empty;
 
             if (numberSystem == 0) pattern = UPC_E_Code0[CheckDigit];
             else pattern = UPC_E_Code1[CheckDigit];

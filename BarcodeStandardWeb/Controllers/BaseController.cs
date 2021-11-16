@@ -3,7 +3,7 @@
     using Cec.Barcode.Repositories;
     using System.Web.Mvc;
 
-    public class BaseController : Controller
+    public class BaseController : Microsoft.AspNetCore.Mvc.Controller
     {
         public IBarCodeDB BarCodeDb
         {

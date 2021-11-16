@@ -31,8 +31,8 @@ namespace BarcodeLib.Symbologies
             //get checksum
             if (Encoded_Type == TYPE.MSI_Mod10 || Encoded_Type == TYPE.MSI_2Mod10)
             {
-                var odds = "";
-                var evens = "";
+                var odds = string.Empty;
+                var evens = string.Empty;
                 for (var i = preEncoded.Length - 1; i >= 0; i -= 2)
                 {
                     odds = preEncoded[i] + odds;
@@ -72,8 +72,8 @@ namespace BarcodeLib.Symbologies
             if (Encoded_Type == TYPE.MSI_2Mod10 || Encoded_Type == TYPE.MSI_Mod11_Mod10)
             {
                 //get second check digit if 2 mod 10 was selected or Mod11/Mod10
-                var odds = "";
-                var evens = "";
+                var odds = string.Empty;
+                var evens = string.Empty;
                 for (var i = preEncoded.Length - 1; i >= 0; i -= 2)
                 {
                     odds = preEncoded[i] + odds;

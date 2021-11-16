@@ -31,7 +31,7 @@ namespace BarcodeLib.Symbologies
                 Error("EUPCA-2: Numeric Data Only");
 
             CheckDigit();
-            
+
             var result = "101"; //start with guard bars
 
             //first number

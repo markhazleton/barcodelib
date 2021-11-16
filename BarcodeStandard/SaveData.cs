@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace BarcodeStandard
 {
@@ -7,7 +8,7 @@ namespace BarcodeStandard
         public SaveData()
         {
         }
-        
+
         public string Type { get; set; }
         public string RawData { get; set; }
         public string EncodedValue { get; set; }
@@ -19,7 +20,7 @@ namespace BarcodeStandard
         public int ImageWidth { get; set; }
         public int ImageHeight { get; set; }
         public string Image { get; set; }
-        public System.Drawing.RotateFlipType RotateFlipType { get; set; }
+        public RotateFlipType RotateFlipType { get; set; }
         public int LabelPosition { get; set; }
         public int Alignment { get; set; }
         public string LabelFont { get; set; }

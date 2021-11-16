@@ -27,16 +27,16 @@ namespace BarcodeLib.Symbologies
 
             if (!CheckNumericOnly(Raw_Data))
                 Error("EI25-2: Numeric Data Only");
-            
+
             var result = "1010";
-            var data = Raw_Data + (_encodedType == TYPE.Interleaved2of5_Mod10 ? CalculateMod10CheckDigit().ToString() : "");
+            var data = Raw_Data + (_encodedType == TYPE.Interleaved2of5_Mod10 ? CalculateMod10CheckDigit().ToString() : string.Empty);
 
             for (int i = 0; i < data.Length; i += 2)
             {
                 var bars = true;
                 var patternbars = _i25Code[(int)char.GetNumericValue(data, i)];
                 var patternspaces = _i25Code[(int)char.GetNumericValue(data, i + 1)];
-                var patternmixed = "";
+                var patternmixed = string.Empty;
 
                 //interleave
                 while (patternbars.Length > 0)
@@ -65,7 +65,7 @@ namespace BarcodeLib.Symbologies
                     bars = !bars;
                 }//foreach
             }//foreach
-            
+
             //add ending bars
             result += "1101";
             return result;

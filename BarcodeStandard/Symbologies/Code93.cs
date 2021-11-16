@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 
 namespace BarcodeLib.Symbologies
 {
@@ -8,7 +9,7 @@ namespace BarcodeLib.Symbologies
     /// </summary>
     class Code93 : BarcodeCommon, IBarcode
     {
-        private readonly System.Data.DataTable C93_Code = new System.Data.DataTable("C93_Code");
+        private readonly DataTable C93_Code = new DataTable("C93_Code");
 
         /// <summary>
         /// Encodes with Code93.
@@ -37,7 +38,7 @@ namespace BarcodeLib.Symbologies
                 }//try
                 catch
                 {
-                        Error("EC93-1: Invalid data.");
+                    Error("EC93-1: Invalid data.");
                 }//catch
             }//foreach
 
@@ -62,12 +63,12 @@ namespace BarcodeLib.Symbologies
             C93_Code.Rows.Add(new object[] { "1", "1", "101001000" });
             C93_Code.Rows.Add(new object[] { "2", "2", "101000100" });
             C93_Code.Rows.Add(new object[] { "3", "3", "101000010" });
-            C93_Code.Rows.Add(new object[] { "4",  "4", "100101000" });
-            C93_Code.Rows.Add(new object[] { "5",  "5", "100100100" });
-            C93_Code.Rows.Add(new object[] { "6",  "6", "100100010" });
-            C93_Code.Rows.Add(new object[] { "7",  "7", "101010000" });
-            C93_Code.Rows.Add(new object[] { "8",  "8", "100010010" });
-            C93_Code.Rows.Add(new object[] { "9",  "9", "100001010" });
+            C93_Code.Rows.Add(new object[] { "4", "4", "100101000" });
+            C93_Code.Rows.Add(new object[] { "5", "5", "100100100" });
+            C93_Code.Rows.Add(new object[] { "6", "6", "100100010" });
+            C93_Code.Rows.Add(new object[] { "7", "7", "101010000" });
+            C93_Code.Rows.Add(new object[] { "8", "8", "100010010" });
+            C93_Code.Rows.Add(new object[] { "9", "9", "100001010" });
             C93_Code.Rows.Add(new object[] { "10", "A", "110101000" });
             C93_Code.Rows.Add(new object[] { "11", "B", "110100100" });
             C93_Code.Rows.Add(new object[] { "12", "C", "110100010" });
@@ -105,7 +106,7 @@ namespace BarcodeLib.Symbologies
             C93_Code.Rows.Add(new object[] { "44", ")", "111011010" });//dont know what character actually goes here
             C93_Code.Rows.Add(new object[] { "45", "#", "111010110" });//dont know what character actually goes here
             C93_Code.Rows.Add(new object[] { "46", "@", "100110010" });//dont know what character actually goes here
-            C93_Code.Rows.Add(new object[] { "-",  "*", "101011110" });
+            C93_Code.Rows.Add(new object[] { "-", "*", "101011110" });
         }//init_Code93
         private string Add_CheckDigits(string input)
         {
@@ -153,7 +154,7 @@ namespace BarcodeLib.Symbologies
 
             return input;
         }//Calculate_CheckDigits
-        
+
         #region IBarcode Members
 
         public string Encoded_Value => Encode_Code93();

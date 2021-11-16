@@ -1,16 +1,17 @@
+using BarcodeLib.Symbologies;
+using BarcodeStandard;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using System.Drawing.Imaging;
-using BarcodeLib.Symbologies;
-using BarcodeStandard;
-using System.Xml.Serialization;
+using System.IO;
+using System.Reflection;
 using System.Security;
-using System.Xml;
 using System.Text;
 using System.Text.Json;
+using System.Xml;
+using System.Xml.Serialization;
 
 /* 
  * ***************************************************
@@ -40,8 +41,8 @@ namespace BarcodeLib
     {
         #region Variables
         private IBarcode ibarcode = new Blank();
-        private string Raw_Data = "";
-        private string Encoded_Value = "";
+        private string Raw_Data = string.Empty;
+        private string Encoded_Value = string.Empty;
         private string _Country_Assigning_Manufacturer_Code = "N/A";
         private TYPE Encoded_Type = TYPE.UNSPECIFIED;
         private Image _Encoded_Image = null;
@@ -134,10 +135,7 @@ namespace BarcodeLib
         /// </summary>
         public Image EncodedImage
         {
-            get
-            {
-                return _Encoded_Image;
-            }
+            get { return _Encoded_Image; }
         }//EncodedImage
         /// <summary>
         /// Gets or sets the color of the bars. (Default is black)
@@ -299,7 +297,7 @@ namespace BarcodeLib
         /// </summary>
         public static Version Version
         {
-            get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version; }
+            get { return Assembly.GetExecutingAssembly().GetName().Version; }
         }
         #endregion
 
@@ -401,7 +399,7 @@ namespace BarcodeLib
 
             this.EncodedImage.RotateFlip(this.RotateFlipType);
 
-            this.EncodingTime = ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
+            this.EncodingTime = (DateTime.Now - dtStartTime).TotalMilliseconds;
 
             return EncodedImage;
         }//Encode
@@ -416,19 +414,19 @@ namespace BarcodeLib
         /// <param name="raw_data" >Optional raw_data parameter to for quick barcode generation</param>
         public string GenerateBarcode(string raw_data = "")
         {
-            if (raw_data != "")
+            if (raw_data != string.Empty)
             {
                 Raw_Data = raw_data;
             }
 
             //make sure there is something to encode
-            if (Raw_Data.Trim() == "")
+            if (Raw_Data.Trim() == string.Empty)
                 throw new Exception("EENCODE-1: Input data not allowed to be blank.");
 
             if (this.EncodedType == TYPE.UNSPECIFIED)
                 throw new Exception("EENCODE-2: Symbology type not allowed to be unspecified.");
 
-            this.Encoded_Value = "";
+            this.Encoded_Value = string.Empty;
             this._Country_Assigning_Manufacturer_Code = "N/A";
 
 
@@ -550,7 +548,7 @@ namespace BarcodeLib
         /// <returns>Bitmap of encoded value.</returns>
         private Bitmap Generate_Image()
         {
-            if (Encoded_Value == "") throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
+            if (Encoded_Value == string.Empty) throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
             Bitmap bitmap = null;
 
             DateTime dtStartTime = DateTime.Now;
@@ -665,7 +663,7 @@ namespace BarcodeLib
                                 // UPCA standardized label
                                 string defTxt = RawData;
                                 string labTxt = defTxt.Substring(0, 1) + "--" + defTxt.Substring(1, 6) + "--" + defTxt.Substring(7);
-                                
+
                                 Font labFont = new Font(this.LabelFont != null ? this.LabelFont.FontFamily.Name : "Arial", Labels.getFontsize(this, Width, Height, labTxt) * DotsPerPointAt96Dpi, FontStyle.Regular, GraphicsUnit.Pixel);
                                 if (this.LabelFont != null)
                                 {
@@ -675,7 +673,7 @@ namespace BarcodeLib
 
                                 ILHeight -= (labFont.Height / 2);
 
-                                iBarWidth = (int)Width / Encoded_Value.Length;
+                                iBarWidth = Width / Encoded_Value.Length;
                             }
                             else
                             {
@@ -928,7 +926,7 @@ namespace BarcodeLib
 
             _Encoded_Image = (Image)bitmap;
 
-            this.EncodingTime += ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
+            this.EncodingTime += (DateTime.Now - dtStartTime).TotalMilliseconds;
 
             return bitmap;
         }//Generate_Image
@@ -1050,7 +1048,7 @@ namespace BarcodeLib
         #endregion
 
         #region XML Methods
-       
+
         private SaveData GetSaveData(Boolean includeImage = true)
         {
             SaveData saveData = new SaveData();
@@ -1089,7 +1087,7 @@ namespace BarcodeLib
 
         public string ToXML(Boolean includeImage = true)
         {
-            if (EncodedValue == "")
+            if (EncodedValue == string.Empty)
                 throw new Exception("EGETXML-1: Could not retrieve XML due to the barcode not being encoded first.  Please call Encode first.");
             else
             {
@@ -1118,7 +1116,7 @@ namespace BarcodeLib
                 if (jsonStream is MemoryStream)
                 {
                     return JsonSerializer.Deserialize<SaveData>(((MemoryStream)jsonStream).ToArray());
-                } 
+                }
                 else
                 {
                     using (var memoryStream = new MemoryStream())
@@ -1127,7 +1125,7 @@ namespace BarcodeLib
                         return JsonSerializer.Deserialize<SaveData>(memoryStream.ToArray());
                     }
                 }
-                
+
             }
         }
         public static SaveData FromXML(Stream xmlStream)

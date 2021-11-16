@@ -1,13 +1,15 @@
+using System.Collections;
+
 namespace BarcodeLib.Symbologies
 {
     /// <summary>
     ///  Codabar encoding
     ///  Written by: Brad Barnhill
     /// </summary>
-    class Codabar: BarcodeCommon, IBarcode
+    class Codabar : BarcodeCommon, IBarcode
     {
-        private readonly System.Collections.Hashtable Codabar_Code = new System.Collections.Hashtable(); //is initialized by init_Codabar()
-        
+        private readonly Hashtable Codabar_Code = new Hashtable(); //is initialized by init_Codabar()
+
         public Codabar(string input)
         {
             Raw_Data = input;
@@ -27,7 +29,8 @@ namespace BarcodeLib.Symbologies
                 case "B": break;
                 case "C": break;
                 case "D": break;
-                default: Error("ECODABAR-2: Data format invalid. (Invalid START character)");
+                default:
+                    Error("ECODABAR-2: Data format invalid. (Invalid START character)");
                     break;
             }//switch
 
@@ -38,7 +41,8 @@ namespace BarcodeLib.Symbologies
                 case "B": break;
                 case "C": break;
                 case "D": break;
-                default: Error("ECODABAR-3: Data format invalid. (Invalid STOP character)");
+                default:
+                    Error("ECODABAR-3: Data format invalid. (Invalid STOP character)");
                     break;
             }//switch
 
@@ -60,7 +64,7 @@ namespace BarcodeLib.Symbologies
             if (!CheckNumericOnly(temp))
                 Error("ECODABAR-4: Data contains invalid  characters.");
 
-            var result = "";
+            var result = string.Empty;
 
             foreach (var c in Raw_Data)
             {

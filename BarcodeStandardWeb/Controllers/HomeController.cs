@@ -8,13 +8,13 @@
     using System.Web.Mvc;
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public Microsoft.AspNetCore.Mvc.ActionResult Index()
         {
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public ActionResult GetFile()
+        public Microsoft.AspNetCore.Mvc.ActionResult GetFile()
         {
             // No need to dispose the stream, MVC does it for you
             string path = Path.Combine(Server.MapPath("/Content/images"), "image.png");
@@ -24,7 +24,7 @@
             return result;
         }
 
-        public ActionResult MyImage()
+        public Microsoft.AspNetCore.Mvc.ActionResult MyImage()
         {
             var BC = new BarCodeModel();
             return new ImageResult

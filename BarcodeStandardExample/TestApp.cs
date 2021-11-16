@@ -1,4 +1,5 @@
 using BarcodeLib;
+using BarcodeStandard;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -15,7 +16,7 @@ namespace BarcodeStandardExample
     public partial class TestApp : Form
     {
         Barcode b = new Barcode();
-        
+
         public TestApp()
         {
             InitializeComponent();
@@ -127,7 +128,7 @@ namespace BarcodeStandardExample
                     //label alignment and position
                     switch (this.cbLabelLocation.SelectedItem.ToString().Trim().ToUpper())
                     {
-                        case "BOTTOMLEFT":  b.LabelPosition = LabelPositions.BOTTOMLEFT; break;
+                        case "BOTTOMLEFT": b.LabelPosition = LabelPositions.BOTTOMLEFT; break;
                         case "BOTTOMRIGHT": b.LabelPosition = LabelPositions.BOTTOMRIGHT; break;
                         case "TOPCENTER": b.LabelPosition = LabelPositions.TOPCENTER; break;
                         case "TOPLEFT": b.LabelPosition = LabelPositions.TOPLEFT; break;
@@ -138,10 +139,10 @@ namespace BarcodeStandardExample
                     //===== Encoding performed here =====
                     barcode.BackgroundImage = b.Encode(type, this.txtData.Text.Trim(), this.btnForeColor.BackColor, this.btnBackColor.BackColor, W, H);
                     //===================================
-                    
+
                     //show the encoding time
                     this.lblEncodingTime.Text = "(" + Math.Round(b.EncodingTime, 0, MidpointRounding.AwayFromZero).ToString() + "ms)";
-                    
+
                     txtEncoded.Text = b.EncodedValue;
 
                     tsslEncodedType.Text = "Encoding Type: " + b.EncodedType.ToString();
@@ -241,7 +242,7 @@ namespace BarcodeStandardExample
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     string fileContents = File.ReadAllText(ofd.FileName);
-                    using (BarcodeStandard.SaveData savedData = Barcode.FromJSON(ofd.OpenFile()))
+                    using (SaveData savedData = Barcode.FromJSON(ofd.OpenFile()))
                     {
                         LoadFromSaveData(savedData);
                     }//using
@@ -281,7 +282,7 @@ namespace BarcodeStandardExample
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     string fileContents = File.ReadAllText(ofd.FileName);
-                    using (BarcodeStandard.SaveData savedData = Barcode.FromXML(ofd.OpenFile()))
+                    using (SaveData savedData = Barcode.FromXML(ofd.OpenFile()))
                     {
                         LoadFromSaveData(savedData);
                     }//using
@@ -295,7 +296,7 @@ namespace BarcodeStandardExample
             barcode.Location = new Point((this.barcode.Location.X + this.barcode.Width / 2) - barcode.Width / 2, (this.barcode.Location.Y + this.barcode.Height / 2) - barcode.Height / 2);
         }
 
-        private void LoadFromSaveData(BarcodeStandard.SaveData saveData)
+        private void LoadFromSaveData(SaveData saveData)
         {
             //load image from xml
             this.barcode.Width = saveData.ImageWidth;

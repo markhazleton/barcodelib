@@ -1,10 +1,10 @@
-﻿@using System.Web.Optimization
+@using System.Web.Optimization
 @{
     string Version = ViewContext.HttpContext.Server.MachineName.ToString();
     Version = String.Format("{0}.{1} ({2}.{3})",
-        ViewContext.Controller.GetType().Assembly.GetName().Version.Major,
-        ViewContext.Controller.GetType().Assembly.GetName().Version.Minor,
-        ViewContext.Controller.GetType().Assembly.GetName().Version.Build,
+        Microsoft.AspNetCore.Mvc.Controller.GetType().Assembly.GetName().Version.Major,
+        Microsoft.AspNetCore.Mvc.Controller.GetType().Assembly.GetName().Version.Minor,
+        Microsoft.AspNetCore.Mvc.Controller.GetType().Assembly.GetName().Version.Build,
         Version.Substring(Version.Length - 4));
 }
 <!DOCTYPE html>

@@ -239,7 +239,7 @@ namespace BarcodeLib
         {
             try
             {
-                int iBarWidth = (int)(Barcode.Width / Barcode.EncodedValue.Length);
+                int iBarWidth = (Barcode.Width / Barcode.EncodedValue.Length);
                 int halfBarWidth = (int)(iBarWidth * 0.5);
                 string defTxt = Barcode.RawData;
 

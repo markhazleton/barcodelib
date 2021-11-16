@@ -8,8 +8,8 @@ namespace BarcodeLib.Symbologies
     /// </summary>
     class UPCSupplement2 : BarcodeCommon, IBarcode
     {
-        private readonly string [] EAN_CodeA    = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
-        private readonly string [] EAN_CodeB    = { "0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111" };
+        private readonly string[] EAN_CodeA = { "0001101", "0011001", "0010011", "0111101", "0100011", "0110001", "0101111", "0111011", "0110111", "0001011" };
+        private readonly string[] EAN_CodeB = { "0100111", "0110011", "0011011", "0100001", "0011101", "0111001", "0000101", "0010001", "0001001", "0010111" };
         private readonly string[] UPC_SUPP_2 = { "aa", "ab", "ba", "bb" };
 
         public UPCSupplement2(string input)
@@ -27,7 +27,7 @@ namespace BarcodeLib.Symbologies
             if (!CheckNumericOnly(Raw_Data))
                 Error("EUPC-SUP2-2: Numeric Data Only");
 
-            string pattern = "";
+            string pattern = string.Empty;
 
             try
             {

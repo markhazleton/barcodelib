@@ -6,7 +6,7 @@ namespace BarcodeLib
 {
     abstract class BarcodeCommon
     {
-        protected string Raw_Data = "";
+        protected string Raw_Data = string.Empty;
         protected List<string> _Errors = new List<string>();
 
         public string RawData

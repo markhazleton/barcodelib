@@ -48,7 +48,7 @@ namespace BarcodeLib.Symbologies
 
             var pattern = UPC_SUPP_5[cs];
 
-            var result = "";
+            var result = string.Empty;
 
             var pos = 0;
             foreach (var c in pattern)
