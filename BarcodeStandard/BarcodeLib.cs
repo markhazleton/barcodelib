@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Reflection;
 using System.Security;
 using System.Text;
 using System.Text.Json;
@@ -41,8 +40,8 @@ namespace BarcodeLib
     {
         #region Variables
         private IBarcode ibarcode = new Blank();
-        private string Raw_Data = string.Empty;
-        private string Encoded_Value = string.Empty;
+        private string Raw_Data = "";
+        private string Encoded_Value = "";
         private string _Country_Assigning_Manufacturer_Code = "N/A";
         private TYPE Encoded_Type = TYPE.UNSPECIFIED;
         private Image _Encoded_Image = null;
@@ -55,6 +54,7 @@ namespace BarcodeLib
         private LabelPositions _LabelPosition = LabelPositions.BOTTOMCENTER;
         private RotateFlipType _RotateFlipType = RotateFlipType.RotateNoneFlipNone;
         private bool _StandardizeLabel = true;
+        private static readonly XmlSerializer _SaveDataXmlSerializer = new XmlSerializer(typeof(SaveData));
         #endregion
 
         #region Constructors
@@ -135,7 +135,10 @@ namespace BarcodeLib
         /// </summary>
         public Image EncodedImage
         {
-            get { return _Encoded_Image; }
+            get
+            {
+                return _Encoded_Image;
+            }
         }//EncodedImage
         /// <summary>
         /// Gets or sets the color of the bars. (Default is black)
@@ -297,8 +300,12 @@ namespace BarcodeLib
         /// </summary>
         public static Version Version
         {
-            get { return Assembly.GetExecutingAssembly().GetName().Version; }
+            get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version; }
         }
+        /// <summary>
+        /// Disables EAN13 invalid country code exception.
+        /// </summary>
+        public bool DisableEAN13CountryException { get; set; } = false;
         #endregion
 
         /// <summary>
@@ -399,7 +406,7 @@ namespace BarcodeLib
 
             this.EncodedImage.RotateFlip(this.RotateFlipType);
 
-            this.EncodingTime = (DateTime.Now - dtStartTime).TotalMilliseconds;
+            this.EncodingTime = ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
 
             return EncodedImage;
         }//Encode
@@ -414,19 +421,19 @@ namespace BarcodeLib
         /// <param name="raw_data" >Optional raw_data parameter to for quick barcode generation</param>
         public string GenerateBarcode(string raw_data = "")
         {
-            if (raw_data != string.Empty)
+            if (raw_data != "")
             {
                 Raw_Data = raw_data;
             }
 
             //make sure there is something to encode
-            if (Raw_Data.Trim() == string.Empty)
+            if (Raw_Data.Trim() == "")
                 throw new Exception("EENCODE-1: Input data not allowed to be blank.");
 
             if (this.EncodedType == TYPE.UNSPECIFIED)
                 throw new Exception("EENCODE-2: Symbology type not allowed to be unspecified.");
 
-            this.Encoded_Value = string.Empty;
+            this.Encoded_Value = "";
             this._Country_Assigning_Manufacturer_Code = "N/A";
 
 
@@ -438,7 +445,7 @@ namespace BarcodeLib
                     break;
                 case TYPE.UCC13:
                 case TYPE.EAN13: //Encode_EAN13();
-                    ibarcode = new EAN13(Raw_Data);
+                    ibarcode = new EAN13(Raw_Data, DisableEAN13CountryException);
                     break;
                 case TYPE.Interleaved2of5_Mod10:
                 case TYPE.Interleaved2of5: //Encode_Interleaved2of5();
@@ -548,7 +555,7 @@ namespace BarcodeLib
         /// <returns>Bitmap of encoded value.</returns>
         private Bitmap Generate_Image()
         {
-            if (Encoded_Value == string.Empty) throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
+            if (Encoded_Value == "") throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
             Bitmap bitmap = null;
 
             DateTime dtStartTime = DateTime.Now;
@@ -673,7 +680,7 @@ namespace BarcodeLib
 
                                 ILHeight -= (labFont.Height / 2);
 
-                                iBarWidth = Width / Encoded_Value.Length;
+                                iBarWidth = (int)Width / Encoded_Value.Length;
                             }
                             else
                             {
@@ -926,7 +933,7 @@ namespace BarcodeLib
 
             _Encoded_Image = (Image)bitmap;
 
-            this.EncodingTime += (DateTime.Now - dtStartTime).TotalMilliseconds;
+            this.EncodingTime += ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
 
             return bitmap;
         }//Generate_Image
@@ -1087,7 +1094,7 @@ namespace BarcodeLib
 
         public string ToXML(Boolean includeImage = true)
         {
-            if (EncodedValue == string.Empty)
+            if (EncodedValue == "")
                 throw new Exception("EGETXML-1: Could not retrieve XML due to the barcode not being encoded first.  Please call Encode first.");
             else
             {
@@ -1095,10 +1102,9 @@ namespace BarcodeLib
                 {
                     using (SaveData xml = GetSaveData(includeImage))
                     {
-                        XmlSerializer writer = new XmlSerializer(typeof(SaveData));
                         using (Utf8StringWriter sw = new Utf8StringWriter())
                         {
-                            writer.Serialize(sw, xml);
+                            _SaveDataXmlSerializer.Serialize(sw, xml);
                             return sw.ToString();
                         }
                     }//using
@@ -1132,10 +1138,9 @@ namespace BarcodeLib
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
                 using (XmlReader reader = XmlReader.Create(xmlStream))
                 {
-                    return (SaveData)serializer.Deserialize(reader);
+                    return (SaveData)_SaveDataXmlSerializer.Deserialize(reader);
                 }
             }//try
             catch (Exception ex)
@@ -1326,8 +1331,8 @@ namespace BarcodeLib
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            // Call GC.SuppressFinalize(object). This will prevent derived types that introduce a finalizer from needing to re-implement 'IDisposable' to call it.	
+            GC.SuppressFinalize(this);
         }
         #endregion
 
