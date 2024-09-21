@@ -3,7 +3,6 @@ using BarcodeStandard;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Security;
@@ -40,8 +39,8 @@ namespace BarcodeLib
     {
         #region Variables
         private IBarcode ibarcode = new Blank();
-        private string Raw_Data = "";
-        private string Encoded_Value = "";
+        private string Raw_Data = string.Empty;
+        private string Encoded_Value = string.Empty;
         private string _Country_Assigning_Manufacturer_Code = "N/A";
         private TYPE Encoded_Type = TYPE.UNSPECIFIED;
         private Image _Encoded_Image = null;
@@ -406,7 +405,7 @@ namespace BarcodeLib
 
             this.EncodedImage.RotateFlip(this.RotateFlipType);
 
-            this.EncodingTime = ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
+            this.EncodingTime = (DateTime.Now - dtStartTime).TotalMilliseconds;
 
             return EncodedImage;
         }//Encode
@@ -421,19 +420,19 @@ namespace BarcodeLib
         /// <param name="raw_data" >Optional raw_data parameter to for quick barcode generation</param>
         public string GenerateBarcode(string raw_data = "")
         {
-            if (raw_data != "")
+            if (raw_data != string.Empty)
             {
                 Raw_Data = raw_data;
             }
 
             //make sure there is something to encode
-            if (Raw_Data.Trim() == "")
+            if (Raw_Data.Trim() == string.Empty)
                 throw new Exception("EENCODE-1: Input data not allowed to be blank.");
 
             if (this.EncodedType == TYPE.UNSPECIFIED)
                 throw new Exception("EENCODE-2: Symbology type not allowed to be unspecified.");
 
-            this.Encoded_Value = "";
+            this.Encoded_Value = string.Empty;
             this._Country_Assigning_Manufacturer_Code = "N/A";
 
 
@@ -555,7 +554,7 @@ namespace BarcodeLib
         /// <returns>Bitmap of encoded value.</returns>
         private Bitmap Generate_Image()
         {
-            if (Encoded_Value == "") throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
+            if (Encoded_Value == string.Empty) throw new Exception("EGENERATE_IMAGE-1: Must be encoded first.");
             Bitmap bitmap = null;
 
             DateTime dtStartTime = DateTime.Now;
@@ -677,7 +676,7 @@ namespace BarcodeLib
 
                                 ILHeight -= (labFont.Height / 2);
 
-                                iBarWidth = (int)Width / Encoded_Value.Length;
+                                iBarWidth = Width / Encoded_Value.Length;
                             }
                             else
                             {
@@ -930,7 +929,7 @@ namespace BarcodeLib
 
             _Encoded_Image = (Image)bitmap;
 
-            this.EncodingTime += ((TimeSpan)(DateTime.Now - dtStartTime)).TotalMilliseconds;
+            this.EncodingTime += (DateTime.Now - dtStartTime).TotalMilliseconds;
 
             return bitmap;
         }//Generate_Image
@@ -1091,7 +1090,7 @@ namespace BarcodeLib
 
         public string ToXML(Boolean includeImage = true)
         {
-            if (EncodedValue == "")
+            if (EncodedValue == string.Empty)
                 throw new Exception("EGETXML-1: Could not retrieve XML due to the barcode not being encoded first.  Please call Encode first.");
             else
             {

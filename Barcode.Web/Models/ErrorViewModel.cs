@@ -1,5 +1,3 @@
-using Cec.Barcode.Models;
-
 namespace Barcode.Web.Models;
 public class ErrorViewModel
 {

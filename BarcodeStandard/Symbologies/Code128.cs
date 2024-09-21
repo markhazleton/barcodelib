@@ -259,7 +259,7 @@ namespace BarcodeLib.Symbologies
         }
         private void BreakUpDataForEncoding()
         {
-            var temp = "";
+            var temp = string.Empty;
             var tempRawData = Raw_Data;
 
             //breaking the raw data up for code A and code B will mess up the encoding
@@ -305,7 +305,7 @@ namespace BarcodeLib.Symbologies
             {
                 if (Char.IsNumber(c))
                 {
-                    if (temp == "")
+                    if (temp == string.Empty)
                     {
                         temp += c;
                     }//if
@@ -313,22 +313,22 @@ namespace BarcodeLib.Symbologies
                     {
                         temp += c;
                         _FormattedData.Add(temp);
-                        temp = "";
+                        temp = string.Empty;
                     }//else
                 }//if
                 else
                 {
-                    if (temp != "")
+                    if (temp != string.Empty)
                     {
                         _FormattedData.Add(temp);
-                        temp = "";
+                        temp = string.Empty;
                     }//if
                     _FormattedData.Add(c.ToString());
                 }//else
             }//foreach
 
             //if something is still in temp go ahead and push it onto the queue
-            if (temp != "")
+            if (temp != string.Empty)
             {
                 _FormattedData.Add(temp);
             }//if
@@ -429,7 +429,7 @@ namespace BarcodeLib.Symbologies
             //insert the start characters
             InsertStartandCodeCharacters();
 
-            var Encoded_Data = "";
+            var Encoded_Data = string.Empty;
             foreach (var s in _FormattedData)
             {
                 //handle exception with apostrophes in select statements
