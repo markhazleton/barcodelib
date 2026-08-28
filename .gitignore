@@ -160,3 +160,6 @@ $RECYCLE.BIN/
 
 # Local verification output
 artifacts/build-verify/
+
+# DevSpark - personal overrides (never commit)
+.documentation/*/commands/
