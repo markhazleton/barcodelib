@@ -5,7 +5,7 @@ date: "2026-08-08"
 status: "Publication-ready draft"
 ---
 
-# From Lines to Links: A Detailed History of Barcodes, UPC Standardization, and the 2D Future of Product Identity
+## From Lines to Links: A Detailed History of Barcodes, UPC Standardization, and the 2D Future of Product Identity
 
 ## Executive summary
 
@@ -500,7 +500,7 @@ That is the real shift from lines to links.
 
 ---
 
-# Appendix A: Condensed timeline
+## Appendix A: Condensed timeline
 
 | Year | Event |
 |---:|---|
@@ -522,7 +522,7 @@ That is the real shift from lines to links.
 
 ---
 
-# Appendix B: Glossary
+## Appendix B: Glossary
 
 **1D barcode**: A barcode that encodes data primarily along one dimension, such as UPC, EAN, Code 39, or Code 128.
 
@@ -552,46 +552,46 @@ That is the real shift from lines to links.
 
 ---
 
-# Source notes and bibliography
+## Source notes and bibliography
 
-[^aar-kartrak]: Association of American Railroads, "The Surprising Innovations that Started With Freight Railroads." See the section "Modern barcodes come from a freight rail challenge," including the discussion of KarTrak, its 13 colored labels, wide railcar adoption, and replacement by RFID AEI tags. Accessed August 8, 2026. https://www.aar.org/the-surprising-innovations-that-started-with-freight-railroads/
+[^aar-kartrak]: Association of American Railroads, "The Surprising Innovations that Started With Freight Railroads." See the section "Modern barcodes come from a freight rail challenge," including the discussion of KarTrak, its 13 colored labels, wide railcar adoption, and replacement by RFID AEI tags. Accessed August 8, 2026. <https://www.aar.org/the-surprising-innovations-that-started-with-freight-railroads/>
 
-[^ibm-upc]: IBM, "The UPC." IBM's history page describes the grocery industry's 1970 call for a standard symbol, George Laurer's role, the Woodland/Silver origin story, the bull's-eye issue, the linear UPC design, and the 1973 birth of the UPC. Accessed August 8, 2026. https://www.ibm.com/history/upc
+[^ibm-upc]: IBM, "The UPC." IBM's history page describes the grocery industry's 1970 call for a standard symbol, George Laurer's role, the Woodland/Silver origin story, the bull's-eye issue, the linear UPC design, and the 1973 birth of the UPC. Accessed August 8, 2026. <https://www.ibm.com/history/upc>
 
-[^woodland-silver-patent]: Norman J. Woodland and Bernard Silver, "Classifying Apparatus and Method," U.S. Patent 2,612,994, filed October 20, 1949, issued October 7, 1952. The patent describes using light/dark line patterns and circular patterns for article classification. Accessed August 8, 2026. https://patents.google.com/patent/US2612994A/en
+[^woodland-silver-patent]: Norman J. Woodland and Bernard Silver, "Classifying Apparatus and Method," U.S. Patent 2,612,994, filed October 20, 1949, issued October 7, 1952. The patent describes using light/dark line patterns and circular patterns for article classification. Accessed August 8, 2026. <https://patents.google.com/patent/US2612994A/en>
 
-[^gs1-timeline]: GS1, "GS1 Historical Timeline." Includes 1973 barcode creation, 1974 UCC administration and first scan, 1977 EAN establishment, 2005 UCC/EAN merger, 2020 GS1 Digital Link, 2021 ambition to read 2D barcodes at retail POS by end of 2027, and 2023/2024 barcode anniversaries. Accessed August 8, 2026. https://support.gs1.org/support/solutions/articles/43000734073-gs1-historical-timeline
+[^gs1-timeline]: GS1, "GS1 Historical Timeline." Includes 1973 barcode creation, 1974 UCC administration and first scan, 1977 EAN establishment, 2005 UCC/EAN merger, 2020 GS1 Digital Link, 2021 ambition to read 2D barcodes at retail POS by end of 2027, and 2023/2024 barcode anniversaries. Accessed August 8, 2026. <https://support.gs1.org/support/solutions/articles/43000734073-gs1-historical-timeline>
 
-[^smithsonian-scanner]: Smithsonian National Museum of American History, "Supermarket Scanner." The record describes the June 26, 1974 Marsh supermarket installation in Troy, Ohio; the Wrigley's gum first purchase; and the Spectra Physics/NCR scanner and computerized cash register system. Accessed August 8, 2026. https://americanhistory.si.edu/collections/object/nmah_892778
+[^smithsonian-scanner]: Smithsonian National Museum of American History, "Supermarket Scanner." The record describes the June 26, 1974 Marsh supermarket installation in Troy, Ohio; the Wrigley's gum first purchase; and the Spectra Physics/NCR scanner and computerized cash register system. Accessed August 8, 2026. <https://americanhistory.si.edu/collections/object/nmah_892778>
 
-[^gs1-general-specs]: GS1, "GS1 General Specifications." GS1 describes this as the core standards document of the GS1 system for how GS1 barcodes and identification keys should be used. Accessed August 8, 2026. https://www.gs1.org/standards/barcodes-epcrfid-id-keys/gs1-general-specifications
+[^gs1-general-specs]: GS1, "GS1 General Specifications." GS1 describes this as the core standards document of the GS1 system for how GS1 barcodes and identification keys should be used. Accessed August 8, 2026. <https://www.gs1.org/standards/barcodes-epcrfid-id-keys/gs1-general-specifications>
 
-[^iso-ean-upc]: ISO, "ISO/IEC 15420:2025 - Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification." Accessed August 8, 2026. https://www.iso.org/standard/84892.html
+[^iso-ean-upc]: ISO, "ISO/IEC 15420:2025 - Information technology — Automatic identification and data capture techniques — EAN/UPC bar code symbology specification." Accessed August 8, 2026. <https://www.iso.org/standard/84892.html>
 
-[^iso-code128]: ISO, "ISO/IEC 15417:2007 - Information technology — Automatic identification and data capture techniques — Code 128 bar code symbology specification." Accessed August 8, 2026. https://www.iso.org/standard/43896.html
+[^iso-code128]: ISO, "ISO/IEC 15417:2007 - Information technology — Automatic identification and data capture techniques — Code 128 bar code symbology specification." Accessed August 8, 2026. <https://www.iso.org/standard/43896.html>
 
-[^iso-qr]: ISO, "ISO/IEC 18004:2024 - Information technology — Automatic identification and data capture techniques — QR code bar code symbology specification." The abstract describes QR Code characteristics, encoding methods, formats, dimensions, error correction rules, decoding, production quality, and parameters. Accessed August 8, 2026. https://www.iso.org/standard/83389.html
+[^iso-qr]: ISO, "ISO/IEC 18004:2024 - Information technology — Automatic identification and data capture techniques — QR code bar code symbology specification." The abstract describes QR Code characteristics, encoding methods, formats, dimensions, error correction rules, decoding, production quality, and parameters. Accessed August 8, 2026. <https://www.iso.org/standard/83389.html>
 
-[^iso-data-matrix]: ISO, "ISO/IEC 16022:2024 - Information technology — Automatic identification and data capture techniques — Data Matrix bar code symbology specification." The abstract describes Data Matrix characteristics, encoding, formats, dimensions, print quality, error correction, decoding, and user-selectable parameters. Accessed August 8, 2026. https://www.iso.org/standard/80926.html
+[^iso-data-matrix]: ISO, "ISO/IEC 16022:2024 - Information technology — Automatic identification and data capture techniques — Data Matrix bar code symbology specification." The abstract describes Data Matrix characteristics, encoding, formats, dimensions, print quality, error correction, decoding, and user-selectable parameters. Accessed August 8, 2026. <https://www.iso.org/standard/80926.html>
 
-[^iso-databar]: ISO, "ISO/IEC 24724:2011 - Information technology — Automatic identification and data capture techniques — GS1 DataBar bar code symbology specification." Accessed August 8, 2026. https://www.iso.org/standard/51426.html
+[^iso-databar]: ISO, "ISO/IEC 24724:2011 - Information technology — Automatic identification and data capture techniques — GS1 DataBar bar code symbology specification." Accessed August 8, 2026. <https://www.iso.org/standard/51426.html>
 
-[^denso-qr-dev]: DENSO WAVE, "QR Code development story." Describes QR Code's 1994 development, manufacturing-site origins, Masahiro Hara's role, and the need for higher-capacity, faster-read codes in high-mix manufacturing. Accessed August 8, 2026. https://www.denso-wave.com/en/technology/vol1.html
+[^denso-qr-dev]: DENSO WAVE, "QR Code development story." Describes QR Code's 1994 development, manufacturing-site origins, Masahiro Hara's role, and the need for higher-capacity, faster-read codes in high-mix manufacturing. Accessed August 8, 2026. <https://www.denso-wave.com/en/technology/vol1.html>
 
-[^denso-qr-30]: DENSO WAVE, "QR Code 30th anniversary." Includes QR Code history, 1994 standardization and free use, mobile phone scanning in 2002, standardization milestones through ISO/IEC 18004, capacity of approximately 7,000 numeric characters, and future concepts including security and supply-chain uses. Accessed August 8, 2026. https://www.denso-wave.com/en/system/qr/qr30th/
+[^denso-qr-30]: DENSO WAVE, "QR Code 30th anniversary." Includes QR Code history, 1994 standardization and free use, mobile phone scanning in 2002, standardization milestones through ISO/IEC 18004, capacity of approximately 7,000 numeric characters, and future concepts including security and supply-chain uses. Accessed August 8, 2026. <https://www.denso-wave.com/en/system/qr/qr30th/>
 
-[^cdc-vaccine-2d]: Centers for Disease Control and Prevention, "Vaccine Two-Dimensional (2D) Barcodes," March 25, 2026. CDC states that 2D barcodes can contain product identification, lot number, and expiration date and can improve data accuracy and completeness. Accessed August 8, 2026. https://www.cdc.gov/iis/2d-barcodes/index.html
+[^cdc-vaccine-2d]: Centers for Disease Control and Prevention, "Vaccine Two-Dimensional (2D) Barcodes," March 25, 2026. CDC states that 2D barcodes can contain product identification, lot number, and expiration date and can improve data accuracy and completeness. Accessed August 8, 2026. <https://www.cdc.gov/iis/2d-barcodes/index.html>
 
-[^gs1-ai]: GS1, "GS1 Application Identifiers." GS1 describes AIs as prefixes used in barcodes and EPC/RFID tags to define the meaning and format of data attributes, including product data beyond GTIN such as batch/lot, serial number, best-before date, and expiration date. Accessed August 8, 2026. https://ref.gs1.org/ai/?lang=en
+[^gs1-ai]: GS1, "GS1 Application Identifiers." GS1 describes AIs as prefixes used in barcodes and EPC/RFID tags to define the meaning and format of data attributes, including product data beyond GTIN such as batch/lot, serial number, best-before date, and expiration date. Accessed August 8, 2026. <https://ref.gs1.org/ai/?lang=en>
 
-[^gs1-dl-uri]: GS1, "GS1 Digital Link Standard: URI Syntax." The standard explains that GS1 Digital Link expresses GS1 identifiers and informative data as HTTP URIs with the same precision as GS1 element-string syntax and that Digital Link URIs can be used as ordinary URLs while also serving as gateways to multiple information sources. Accessed August 8, 2026. https://ref.gs1.org/standards/digital-link/uri-syntax/
+[^gs1-dl-uri]: GS1, "GS1 Digital Link Standard: URI Syntax." The standard explains that GS1 Digital Link expresses GS1 identifiers and informative data as HTTP URIs with the same precision as GS1 element-string syntax and that Digital Link URIs can be used as ordinary URLs while also serving as gateways to multiple information sources. Accessed August 8, 2026. <https://ref.gs1.org/standards/digital-link/uri-syntax/>
 
-[^gs1-resolver]: GS1, "GS1-Conformant Resolver Standard." States that the input to a GS1-Conformant Resolver is a GS1 Digital Link URI. Accessed August 8, 2026. https://ref.gs1.org/standards/resolver/
+[^gs1-resolver]: GS1, "GS1-Conformant Resolver Standard." States that the input to a GS1-Conformant Resolver is a GS1 Digital Link URI. Accessed August 8, 2026. <https://ref.gs1.org/standards/resolver/>
 
-[^gs1-system-architecture]: GS1, "GS1 System Architecture Document." Describes the Digital Link standard as specifying Web URI syntax for GS1 identifiers and a resolver/resolution capability for linking a Digital Link URI to sources of relevant information and services. Accessed August 8, 2026. https://www.gs1.org/standards/gs1-system-architecture-document/current-standard
+[^gs1-system-architecture]: GS1, "GS1 System Architecture Document." Describes the Digital Link standard as specifying Web URI syntax for GS1 identifiers and a resolver/resolution capability for linking a Digital Link URI to sources of relevant information and services. Accessed August 8, 2026. <https://www.gs1.org/standards/gs1-system-architecture-document/current-standard>
 
-[^gs1us-retailers]: GS1 US, "GS1 Digital Link: For Retailers." Explains dual marking during transition, the 2027 sunrise date for 2D acceptance at POS, continued UPC acceptance after 2027, and use cases such as recalled/expired products, automatic discounting, returns, and B2B data sharing. Accessed August 8, 2026. https://www.gs1us.org/industries-and-insights/gs1-digital-link/for-retailers
+[^gs1us-retailers]: GS1 US, "GS1 Digital Link: For Retailers." Explains dual marking during transition, the 2027 sunrise date for 2D acceptance at POS, continued UPC acceptance after 2027, and use cases such as recalled/expired products, automatic discounting, returns, and B2B data sharing. Accessed August 8, 2026. <https://www.gs1us.org/industries-and-insights/gs1-digital-link/for-retailers>
 
-[^eu-espr]: Regulation (EU) 2024/1781 of the European Parliament and of the Council, June 13, 2024. Establishes a digital product passport and requires it to be connected through a data carrier to a persistent unique product identifier, with the data carrier physically present on product, packaging, or documentation as specified. Accessed August 8, 2026. https://eur-lex.europa.eu/eli/reg/2024/1781/eng
+[^eu-espr]: Regulation (EU) 2024/1781 of the European Parliament and of the Council, June 13, 2024. Establishes a digital product passport and requires it to be connected through a data carrier to a persistent unique product identifier, with the data carrier physically present on product, packaging, or documentation as specified. Accessed August 8, 2026. <https://eur-lex.europa.eu/eli/reg/2024/1781/eng>
 
-[^eu-battery-passport]: European Commission, "Digital Product Passport for Batteries (Battery Passport)." States that the battery passport will be linked to a battery through a QR code, lists likely information categories, and gives timeline items including DPP Registry operational July 20, 2026 and battery passport mandatory February 18, 2027 for relevant battery categories. Accessed August 8, 2026. https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/batteries_en
+[^eu-battery-passport]: European Commission, "Digital Product Passport for Batteries (Battery Passport)." States that the battery passport will be linked to a battery through a QR code, lists likely information categories, and gives timeline items including DPP Registry operational July 20, 2026 and battery passport mandatory February 18, 2027 for relevant battery categories. Accessed August 8, 2026. <https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/batteries_en>

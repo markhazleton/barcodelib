@@ -22,14 +22,15 @@
     <AssemblyVersion>3.4.0.0</AssemblyVersion>
     <FileVersion>3.4.0.0</FileVersion>
     <PackageReleaseNotes>3.4.0: Added QR Code support (TYPE.QRCODE) -- both raster (EncodedImage) and SVG (GetSvg()) output, via a vendored MIT-licensed QR encoder (no new runtime package dependency). Access the 2D module grid via the new EncodedMatrix property; EncodedValue throws NotSupportedException for QR since it's a 1D-only API. 3.3.0: Added Barcode.GetSvg() for vector SVG output alongside the existing raster rendering, sharing the same GS1-aware bar geometry. 3.2.0: Rendered barcodes now reserve a GS1-compliant quiet zone by default (see EnforceGS1QuietZone to opt back into the previous, non-compliant geometry). This changes rendered pixel geometry for UPC-A, EAN-13, and most other symbologies.</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.301" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.400" PrivateAssets="All" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common" Version="10.0.10" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.11" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +71,10 @@
       <PackagePath></PackagePath>
     </None>
     <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

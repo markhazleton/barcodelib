@@ -1,0 +1,17 @@
+{
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD033": false,
+    "MD041": false,
+    "MD060": false
+  },
+  "ignores": [
+    // Generated build and publish artifacts are not source documentation.
+    "artifacts/**",
+    // Vendored NuGet package contents are third-party distribution files.
+    "packages/**",
+    // Vendored browser library assets are third-party distribution files.
+    "Barcode.Web/wwwroot/lib/**"
+  ]
+}
