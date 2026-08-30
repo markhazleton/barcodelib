@@ -1,5 +1,5 @@
 ---
-description: DevSpark list-applications command shim.
+description: DevSpark discover-knowledge command shim.
 ---
 ## Prompt Resolution
 
@@ -7,9 +7,9 @@ Determine the current git user by running `git config user.name`.
 Normalize to a folder-safe slug: lowercase, replace spaces with hyphens, strip non-alphanumeric/hyphen chars.
 
 Read and execute the instructions from the **first file that exists**:
-1. `.knowledge/overrides/{git-user}/commands/devspark.list-applications.md` (personalized override)
-2. `.knowledge/overrides/commands/devspark.list-applications.md` (team customization)
-3. `.devspark/defaults/commands/devspark.list-applications.md` (stock default)
+1. `.knowledge/overrides/{git-user}/commands/devspark.discover-knowledge.md` (personalized override)
+2. `.knowledge/overrides/commands/devspark.discover-knowledge.md` (team customization)
+3. `.devspark/defaults/commands/devspark.discover-knowledge.md` (stock default)
 ## User Input
 
 $ARGUMENTS
