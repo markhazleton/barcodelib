@@ -1,0 +1,16 @@
+{
+  "tags": {
+    "devspark_app": "barcode-web",
+    "kind": "web-client",
+    "runtime": "dotnet",
+    "framework": "aspnet-core-mvc"
+  },
+  "rules": [
+    "Keep the sample UI aligned with supported BarcodeLib symbologies.",
+    "Validate user input before generating barcode images or SVG."
+  ],
+  "hints": {
+    "project": "Barcode.Web.csproj",
+    "run_command": "dotnet run --project Barcode.Web/Barcode.Web.csproj"
+  }
+}

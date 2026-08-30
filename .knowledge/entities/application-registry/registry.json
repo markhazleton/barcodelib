@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "mode": "multi-app",
+  "platform": "github",
+  "profiles": {
+    "dotnet-library": {
+      "tags": {
+        "runtime": "dotnet",
+        "language": "csharp",
+        "package": "nuget"
+      },
+      "rules": [
+        "Preserve public API compatibility unless a breaking change is explicit and versioned.",
+        "Protect symbology behavior with targeted regression tests."
+      ],
+      "hints": {
+        "test_command": "dotnet test Barcode.sln",
+        "package_project": "BarcodeStandard/BarcodeStandard.csproj"
+      }
+    },
+    "aspnet-web": {
+      "tags": {
+        "runtime": "dotnet",
+        "framework": "aspnet-core-mvc"
+      },
+      "rules": [
+        "Keep the web sample aligned with the library's current supported symbologies.",
+        "Validate user input before generating barcode output."
+      ],
+      "hints": {
+        "run_project": "Barcode.Web/Barcode.Web.csproj"
+      }
+    },
+    "test-suite": {
+      "tags": {
+        "runtime": "dotnet",
+        "framework": "mstest"
+      },
+      "rules": [
+        "Regression tests must verify observable barcode behavior, not only code coverage metrics."
+      ],
+      "hints": {
+        "test_project": "BarcodeStandardTests/BarcodeStandardTests.csproj"
+      }
+    }
+  },
+  "apps": [
+    {
+      "id": "barcode-standard",
+      "name": "BarcodeStandard",
+      "path": "BarcodeStandard",
+      "kind": "library",
+      "purpose": "Core BarcodeLib package that encodes and renders supported 1D and QR symbologies.",
+      "runtime": "dotnet",
+      "owner": "Make Bold Solutions",
+      "criticality": "high",
+      "inherits": [
+        "dotnet-library"
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": "barcode-web",
+      "name": "Barcode.Web",
+      "path": "Barcode.Web",
+      "kind": "web-client",
+      "purpose": "ASP.NET Core MVC sample and product-facing web experience for BarcodeLib.",
+      "runtime": "dotnet",
+      "owner": "Make Bold Solutions",
+      "criticality": "medium",
+      "inherits": [
+        "aspnet-web"
+      ],
+      "dependsOn": [
+        "barcode-standard"
+      ]
+    },
+    {
+      "id": "barcode-standard-tests",
+      "name": "BarcodeStandardTests",
+      "path": "BarcodeStandardTests",
+      "kind": "qa-tool",
+      "purpose": "MSTest regression suite for library encoding, rendering, quiet-zone, SVG, and QR behavior.",
+      "runtime": "dotnet",
+      "owner": "Make Bold Solutions",
+      "criticality": "medium",
+      "inherits": [
+        "test-suite"
+      ],
+      "dependsOn": [
+        "barcode-standard"
+      ]
+    }
+  ]
+}

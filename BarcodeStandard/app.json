@@ -1,0 +1,16 @@
+{
+  "tags": {
+    "devspark_app": "barcode-standard",
+    "kind": "library",
+    "runtime": "dotnet",
+    "package": "nuget"
+  },
+  "rules": [
+    "Preserve BarcodeLib public API compatibility unless explicitly versioned.",
+    "Add or update regression tests for every symbology behavior change."
+  ],
+  "hints": {
+    "project": "BarcodeStandard.csproj",
+    "package_id": "BarcodeLib"
+  }
+}

@@ -163,3 +163,8 @@ artifacts/build-verify/
 
 # DevSpark - personal overrides (never commit)
 .documentation/*/commands/
+.knowledge/overrides/*/commands/
+
+# DevSpark v4 - local work state and runtime outputs
+.devspark.work/
+.knowledge/devspark/runs/

@@ -1,0 +1,15 @@
+{
+  "tags": {
+    "devspark_app": "barcode-standard-tests",
+    "kind": "qa-tool",
+    "runtime": "dotnet",
+    "framework": "mstest"
+  },
+  "rules": [
+    "Tests must assert observable barcode contracts and rendering behavior."
+  ],
+  "hints": {
+    "project": "BarcodeStandardTests.csproj",
+    "test_command": "dotnet test Barcode.sln"
+  }
+}
