@@ -14,7 +14,11 @@ from typing import Any
 import yaml
 
 
-ROOT = Path(__file__).resolve().parents[2]
+SCRIPT_PATH = Path(__file__).resolve()
+if SCRIPT_PATH.parents[2].name == ".devspark":
+    ROOT = SCRIPT_PATH.parents[3]
+else:
+    ROOT = SCRIPT_PATH.parents[2]
 ENTITIES_DIR = ROOT / ".knowledge" / "entities"
 DECISIONS_DIR = ROOT / ".knowledge" / "governance" / "decisions"
 ONTOLOGY_DIR = ROOT / ".knowledge" / "ontology"
@@ -161,6 +165,8 @@ def load_decisions(findings: list[Finding]) -> dict[str, Decision]:
         return decisions
 
     for path in sorted(DECISIONS_DIR.glob("*.md")):
+        if path.name.lower() == "readme.md":
+            continue
         data = read_frontmatter(path)
         decision_id = str(data.get("id", path.stem))
         if not ID_RE.match(decision_id):
@@ -441,7 +447,7 @@ def run(write: bool) -> int:
         return 1 if error_count else 0
 
     if problems:
-        print("Generated ontology files are stale. Run: python scripts/python/build_knowledge_index.py --write")
+        print(f"Generated ontology files are stale. Run: python {rel(SCRIPT_PATH)} --write")
         print("\n\n".join(problems))
         return 1
     if error_count:

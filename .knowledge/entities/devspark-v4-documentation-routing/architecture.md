@@ -1,32 +1,3 @@
----
-id: devspark-v4-documentation-routing
-name: DevSpark v4 Documentation Routing
-kind: repository-configuration
-summary: Routes legacy `.documentation` artifacts into v4 current truth, transient work state, or human archive.
-relations:
-  - type: describes
-    object: barcodelib-repo
-  - type: supports
-    object: adr-0001-devspark-v4-knowledge-boundary
-owner: Make Bold Solutions
-lifecycle: current
-root: .knowledge
-managed_by: human
-evidence:
-  - type: doc
-    ref: .knowledge/governance/decisions/adr-0001-devspark-v4-knowledge-boundary.md
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: doc
-    ref: .knowledge/governance/constitution.md
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: doc
-    ref: .devspark/templates/command-preamble-contract.md
-    verified_by: inspection
-    last_verified: 2026-08-30
----
-
 # DevSpark v4 Documentation Routing
 
 ## Taxonomy

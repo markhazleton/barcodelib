@@ -1,0 +1,24 @@
+id: application-registry
+name: Application Registry
+kind: integration-catalog
+summary: DevSpark v4 multi-app registry for BarcodeStandard, Barcode.Web, and BarcodeStandardTests.
+relations:
+  - type: describes
+    object: barcodelib-repo
+owner: Make Bold Solutions
+lifecycle: current
+root: .knowledge/entities/application-registry
+managed_by: human
+required_layers:
+  - architecture.md
+evidence:
+  - type: code
+    ref: .knowledge/entities/application-registry/registry.json
+    verified_by: inspection
+    test_attempted: false
+    fallback_reason: Registry discovery is configuration-only and has no executable behavior by itself.
+    last_verified: 2026-08-30
+  - type: doc
+    ref: .knowledge/governance/constitution.md
+    verified_by: inspection
+    last_verified: 2026-08-30

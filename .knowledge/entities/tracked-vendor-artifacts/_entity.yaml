@@ -1,0 +1,34 @@
+id: tracked-vendor-artifacts
+name: Tracked Vendor Artifacts
+kind: repository-configuration
+summary: Documents tracked third-party package, web library, and artifact folders that affect audit interpretation.
+relations:
+  - type: describes
+    object: barcodelib-repo
+  - type: supports
+    object: devspark-v4-workflow
+owner: Make Bold Solutions
+lifecycle: current
+root: .
+managed_by: human
+required_layers:
+  - architecture.md
+evidence:
+  - type: code
+    ref: .gitignore
+    verified_by: inspection
+    test_attempted: false
+    fallback_reason: Tracked-artifact classification is repository-structure evidence, not executable behavior.
+    last_verified: 2026-08-30
+  - type: code
+    ref: Barcode.Web/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js
+    verified_by: inspection
+    test_attempted: false
+    fallback_reason: Tracked-artifact classification is repository-structure evidence, not executable behavior.
+    last_verified: 2026-08-30
+  - type: code
+    ref: BarcodeStandardTests/BarcodeStandardTests.csproj
+    verified_by: inspection
+    test_attempted: false
+    fallback_reason: Dependency posture is represented as current project metadata; vulnerability command output is temporary work evidence.
+    last_verified: 2026-08-30

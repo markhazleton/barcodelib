@@ -1,34 +1,3 @@
----
-id: barcodelib-repo
-name: BarcodeLib Repository
-kind: repository-configuration
-summary: Repository-level configuration and scope model for the BarcodeLib solution.
-relations:
-  - type: uses
-    object: application-registry
-  - type: uses
-    object: devspark-v4-workflow
-  - type: supports
-    object: barcode-domain
-owner: Make Bold Solutions
-lifecycle: current
-root: .
-managed_by: human
-evidence:
-  - type: code
-    ref: Barcode.sln
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: code
-    ref: Directory.Build.props
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: doc
-    ref: README.md
-    verified_by: inspection
-    last_verified: 2026-08-30
----
-
 # BarcodeLib Repository
 
 This repository contains a .NET solution with three registered DevSpark apps:

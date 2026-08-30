@@ -1,0 +1,4 @@
+constrained_by:
+- adr-0001-devspark-v4-knowledge-boundary
+generated_by: devspark.current_truth
+generated_on: '2026-08-30'

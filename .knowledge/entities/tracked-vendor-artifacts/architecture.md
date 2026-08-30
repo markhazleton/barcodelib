@@ -1,33 +1,3 @@
----
-id: tracked-vendor-artifacts
-name: Tracked Vendor Artifacts
-kind: repository-configuration
-summary: Documents tracked third-party package, web library, and artifact folders that affect audit interpretation.
-relations:
-  - type: describes
-    object: barcodelib-repo
-  - type: supports
-    object: devspark-v4-workflow
-owner: Make Bold Solutions
-lifecycle: current
-root: .
-managed_by: human
-evidence:
-  - type: code
-    ref: .gitignore
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: code
-    ref: Barcode.Web/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: test
-    ref: dotnet list Barcode.sln package --vulnerable --include-transitive
-    verified_by: execution
-    test_attempted: true
-    last_verified: 2026-08-30
----
-
 # Tracked Vendor Artifacts
 
 The repository currently tracks third-party or generated-distribution material

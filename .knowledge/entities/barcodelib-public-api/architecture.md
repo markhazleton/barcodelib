@@ -1,36 +1,3 @@
----
-id: barcodelib-public-api
-name: BarcodeLib Public API
-kind: knowledge-model
-summary: Public API and compatibility surface for the BarcodeLib package.
-relations:
-  - type: extends
-    object: barcode-domain
-  - type: uses
-    object: symbology-catalog
-  - type: uses
-    object: rendering-contracts
-  - type: validated_by
-    object: test-evidence-model
-owner: Make Bold Solutions
-lifecycle: current
-root: BarcodeStandard
-managed_by: human
-evidence:
-  - type: code
-    ref: BarcodeStandard/BarcodeLib.cs
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: code
-    ref: BarcodeStandard/Barcode.Properties.cs
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: code
-    ref: BarcodeStandard/Barcode.StaticEncode.cs
-    verified_by: inspection
-    last_verified: 2026-08-30
----
-
 # BarcodeLib Public API
 
 The public package contract centers on `BarcodeLib.Barcode` plus supporting

@@ -29,25 +29,25 @@ evidence:
 
 | Entity | File | Purpose |
 |--------|------|---------|
-| `barcodelib-repo` | `.knowledge/entities/repository-configuration/barcodelib-repo.md` | Repository shape and app boundaries. |
+| `barcodelib-repo` | `.knowledge/entities/barcodelib-repo/architecture.md` | Repository shape and app boundaries. |
 | `application-registry` | `.knowledge/entities/application-registry/registry.json` | DevSpark v4 multi-app scope registry. |
-| `devspark-v4-documentation-routing` | `.knowledge/entities/repository-configuration/devspark-v4-documentation-routing.md` | Routing of legacy documentation into v4 destinations. |
-| `tracked-vendor-artifacts` | `.knowledge/entities/repository-configuration/tracked-vendor-artifacts.md` | Tracked third-party package and web library posture. |
+| `devspark-v4-documentation-routing` | `.knowledge/entities/devspark-v4-documentation-routing/architecture.md` | Routing of legacy documentation into v4 destinations. |
+| `tracked-vendor-artifacts` | `.knowledge/entities/tracked-vendor-artifacts/architecture.md` | Tracked third-party package and web library posture. |
 
 ## Knowledge Models
 
 | Entity | File | Purpose |
 |--------|------|---------|
-| `barcode-domain` | `.knowledge/entities/knowledge-model/barcode-domain.md` | Core product/domain model. |
-| `barcodelib-public-api` | `.knowledge/entities/knowledge-model/barcodelib-public-api.md` | Public BarcodeLib API and compatibility surface. |
-| `symbology-catalog` | `.knowledge/entities/knowledge-model/symbology-catalog.md` | Supported barcode symbologies and enum catalog. |
-| `rendering-contracts` | `.knowledge/entities/knowledge-model/rendering-contracts.md` | Raster, SVG, label, alignment, and quiet-zone contracts. |
-| `qr-code-support` | `.knowledge/entities/knowledge-model/qr-code-support.md` | QR Code matrix support and scanability evidence. |
-| `web-sample-flows` | `.knowledge/entities/knowledge-model/web-sample-flows.md` | ASP.NET Core MVC demo and export flows. |
-| `test-evidence-model` | `.knowledge/entities/knowledge-model/test-evidence-model.md` | Test suite coverage and verification rules. |
+| `barcode-domain` | `.knowledge/entities/barcode-domain/architecture.md` | Core product/domain model. |
+| `barcodelib-public-api` | `.knowledge/entities/barcodelib-public-api/architecture.md` | Public BarcodeLib API and compatibility surface. |
+| `symbology-catalog` | `.knowledge/entities/symbology-catalog/architecture.md` | Supported barcode symbologies and enum catalog. |
+| `rendering-contracts` | `.knowledge/entities/rendering-contracts/architecture.md` | Raster, SVG, label, alignment, and quiet-zone contracts. |
+| `qr-code-support` | `.knowledge/entities/qr-code-support/architecture.md` | QR Code matrix support and scanability evidence. |
+| `web-sample-flows` | `.knowledge/entities/web-sample-flows/architecture.md` | ASP.NET Core MVC demo and export flows. |
+| `test-evidence-model` | `.knowledge/entities/test-evidence-model/architecture.md` | Test suite coverage and verification rules. |
 
 ## Contributor Practice
 
 | Entity | File | Purpose |
 |--------|------|---------|
-| `devspark-v4-workflow` | `.knowledge/entities/contributor-practice/devspark-v4-workflow.md` | DevSpark v4 command, scope, and verification practice. |
+| `devspark-v4-workflow` | `.knowledge/entities/devspark-v4-workflow/architecture.md` | DevSpark v4 command, scope, and verification practice. |

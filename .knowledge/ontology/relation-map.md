@@ -29,26 +29,20 @@ evidence:
 barcodelib-repo
 ├── uses application-registry
 ├── governed by .knowledge/governance/constitution.md
-├── scopes barcode-standard
-│   ├── uses barcode-domain
-│   ├── exposes barcodelib-public-api
-│   ├── implements symbology-catalog
-│   ├── implements rendering-contracts
-│   └── extends qr-code-support
-├── scopes barcode-web
-│   ├── uses barcodelib-public-api
-│   └── describes web-sample-flows
-├── scopes barcode-standard-tests
-│   ├── validates symbology-catalog
-│   ├── validates rendering-contracts
-│   └── validates qr-code-support
-└── uses devspark-v4-workflow
+├── uses devspark-v4-workflow
+├── supports barcode-domain
+├── described by application-registry
+├── described by devspark-v4-documentation-routing
+├── described by tracked-vendor-artifacts
+└── described by web-sample-flows
 ```
 
 ## Dependency Edges
 
-- `barcode-web` depends on `barcode-standard`.
-- `barcode-standard-tests` depends on `barcode-standard`.
+- `application-registry` declares `barcode-web` as depending on
+  `barcode-standard`.
+- `application-registry` declares `barcode-standard-tests` as depending on
+  `barcode-standard`.
 - `qr-code-support` extends `symbology-catalog` and uses `rendering-contracts`.
 - `test-evidence-model` validates `barcodelib-public-api`, `rendering-contracts`, and `qr-code-support`.
 - `tracked-vendor-artifacts` supports repository audit interpretation by separating project-owned code from vendored files.

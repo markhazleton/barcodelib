@@ -29,9 +29,9 @@ evidence:
 
 | Category | Directory | Purpose |
 |----------|-----------|---------|
-| Repository configuration | `.knowledge/entities/repository-configuration/` | Repo shape, DevSpark routing, platform, tracked artifact posture. |
-| Knowledge model | `.knowledge/entities/knowledge-model/` | Barcode domain, public API, rendering, QR, tests, and web flow models. |
-| Contributor practice | `.knowledge/entities/contributor-practice/` | Development workflow and verification expectations. |
+| Repository configuration | `.knowledge/entities/<id>/` | Repo shape, DevSpark routing, platform, tracked artifact posture. |
+| Knowledge model | `.knowledge/entities/<id>/` | Barcode domain, public API, rendering, QR, tests, and web flow models. |
+| Contributor practice | `.knowledge/entities/<id>/` | Development workflow and verification expectations. |
 | Application registry | `.knowledge/entities/application-registry/` | Multi-app registry consumed by DevSpark v4 scope resolution. |
 
 ## Relation Vocabulary

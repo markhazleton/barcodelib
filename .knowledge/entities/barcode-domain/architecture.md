@@ -1,30 +1,3 @@
----
-id: barcode-domain
-name: Barcode Domain Model
-kind: knowledge-model
-summary: Domain model for encoding data into barcode raster images, SVG documents, and matrix outputs.
-relations:
-  - type: describes
-    object: barcodelib-repo
-  - type: supports
-    object: symbology-catalog
-  - type: supports
-    object: rendering-contracts
-owner: Make Bold Solutions
-lifecycle: current
-root: BarcodeStandard
-managed_by: human
-evidence:
-  - type: code
-    ref: BarcodeStandard/BarcodeLib.cs
-    verified_by: inspection
-    last_verified: 2026-08-30
-  - type: doc
-    ref: README.md
-    verified_by: inspection
-    last_verified: 2026-08-30
----
-
 # Barcode Domain Model
 
 BarcodeLib converts caller-provided string data into barcode output for multiple
